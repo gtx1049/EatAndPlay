@@ -1,9 +1,13 @@
 package com.gtx.controll;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.text.Layout;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.daimajia.swipe.SwipeLayout;
@@ -48,7 +52,7 @@ public class CommonViewAdapter extends BaseSwipeAdapter
     @Override
     public int getCount()
     {
-        return 4;
+        return 7;
     }
 
     @Override

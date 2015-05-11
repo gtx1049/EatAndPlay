@@ -17,6 +17,7 @@
 
     <!-- Surface View Start -->
     <LinearLayout
+        android:id="@+id/item_background"
         android:padding="10dp"
         android:background="#ffffff"
         android:layout_width="match_parent"
