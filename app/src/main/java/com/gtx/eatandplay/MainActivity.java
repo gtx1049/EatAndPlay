@@ -1,20 +1,12 @@
 package com.gtx.eatandplay;
 
-import android.app.Activity;
+
 import android.app.TabActivity;
 import android.content.Intent;
-import android.media.Image;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentTabHost;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TabHost;
-import android.widget.TextView;
+
+import com.gtx.model.Entry;
 
 
 public class MainActivity extends TabActivity
@@ -45,6 +37,8 @@ public class MainActivity extends TabActivity
         mTabHost.addTab(mTabHost.newTabSpec("EAT")
                 .setIndicator(null, getResources().getDrawable(R.drawable.happy))
                 .setContent(R.id.happy));
+
+        Entry.initialDatabase(this);
     }
 
 }
