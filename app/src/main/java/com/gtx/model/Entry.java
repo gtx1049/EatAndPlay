@@ -6,6 +6,8 @@ import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -37,7 +39,7 @@ public class Entry
     private int type;
 
     private static String CRATE = "CREATE TABLE entry (id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                                                       "name VARCHAR, description VARCHAR, address VARCHAR" +
+                                                       "name VARCHAR, description VARCHAR, address VARCHAR," +
                                                        "predate DATE, money INTEGER, image VARCHAR, type INTEGER)";
 
     public Entry(String name, String address, String description, Date date, int money)
@@ -51,10 +53,12 @@ public class Entry
 
     public boolean saveSelf()
     {
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+
         ContentValues values = new ContentValues();
 
         values.put(KEY_NAME, name);
-        values.put(KEY_DATE, date.toString());
+        values.put(KEY_DATE, format.format(date));
         values.put(KEY_DESCRIPTION, description);
         values.put(KEY_ADDRESS, address);
         values.put(KEY_MONEY, money);
@@ -63,7 +67,8 @@ public class Entry
 
         if(db != null)
         {
-            db.replace("entry", null, values);
+            long id = db.insert("entry", null, values);
+            System.out.println(id);
         }
 
         return true;
