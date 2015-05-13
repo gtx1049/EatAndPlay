@@ -25,4 +25,6 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:21.0.0'
     compile "com.daimajia.swipelayout:library:1.2.0@aar"
     compile 'com.beardedhen:androidbootstrap:+'
+    compile 'com.squareup:android-times-square:1.5.0@aar'
+    compile 'com.github.siyamed:android-shape-imageview:0.9.+@aar'
 }

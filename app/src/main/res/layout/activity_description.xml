@@ -1,12 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:bootstrap="http://schemas.android.com/apk/res-auto"
-
+              xmlns:bootstrapthumbnail="http://schemas.android.com/apk/res-auto"
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
     <LinearLayout
-        android:id="@+id/top_control"
+        android:id="@+id/top_control_add"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -16,27 +15,29 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:text="Success"
+            android:text="back"
             bootstrap:bb_icon_right="fa-android"
             bootstrap:bb_type="default"
             />
         <com.beardedhen.androidbootstrap.BootstrapButton
-            android:id="@+id/add_food"
+            android:id="@+id/check_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:text="ADD"
-            bootstrap:bb_icon_right="fa-plus"
+            android:text="OK"
+            bootstrap:bb_icon_right="fa-check"
             bootstrap:bb_type="default"
             />
     </LinearLayout>
 
-    <ListView
+    <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/common_list"
-        android:layout_weight="1"
-        android:divider="#00000000"
-        android:dividerHeight="18dp"
-        android:layout_marginBottom="60dp"/>
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="10dp"
+        android:textCursorDrawable="@null"
+        android:id="@+id/description_input"/>
+
 </LinearLayout>

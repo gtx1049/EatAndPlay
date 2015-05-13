@@ -20,6 +20,7 @@ public class Entry
 
     public static final String KEY_NAME = "name";
     public static final String KEY_DESCRIPTION = "description";
+    public static final String KEY_ADDRESS = "address";
     public static final String KEY_DATE = "predate";
     public static final String KEY_MONEY = "money";
     public static final String KEY_IMAGE = "image";
@@ -29,18 +30,20 @@ public class Entry
 
     private String name;
     private String description;
+    private String address;
     private Date date;
     private int money;
-    private Bitmap bitmap;
+    private String bitmap;
     private int type;
 
     private static String CRATE = "CREATE TABLE entry (id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                                                       "name VARCHAR, description VARCHAR, " +
-                                                       "predate DATE, money INTEGER, image BLOB, type INTEGER)";
+                                                       "name VARCHAR, description VARCHAR, address VARCHAR" +
+                                                       "predate DATE, money INTEGER, image VARCHAR, type INTEGER)";
 
-    public Entry(String name, String description, Date date, int money)
+    public Entry(String name, String address, String description, Date date, int money)
     {
         this.name = name;
+        this.address = address;
         this.description = description;
         this.date = date;
         this.money = money;
@@ -53,7 +56,9 @@ public class Entry
         values.put(KEY_NAME, name);
         values.put(KEY_DATE, date.toString());
         values.put(KEY_DESCRIPTION, description);
+        values.put(KEY_ADDRESS, address);
         values.put(KEY_MONEY, money);
+        values.put(KEY_IMAGE, bitmap);
         values.put(KEY_TYPE, type);
 
         if(db != null)
@@ -104,12 +109,12 @@ public class Entry
         this.money = money;
     }
 
-    public Bitmap getBitmap()
+    public String getBitmap()
     {
         return bitmap;
     }
 
-    public void setBitmap(Bitmap bitmap)
+    public void setBitmap(String bitmap)
     {
         this.bitmap = bitmap;
     }
@@ -122,6 +127,16 @@ public class Entry
     public void setType(int type)
     {
         this.type = type;
+    }
+
+    public String getAddress()
+    {
+        return address;
+    }
+
+    public void setAddress(String address)
+    {
+        this.address = address;
     }
 
     public static boolean initialDatabase(Context context)

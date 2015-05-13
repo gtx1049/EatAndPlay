@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:bootstrap="http://schemas.android.com/apk/res-auto"
-              xmlns:bootstrapthumbnail="http://schemas.android.com/apk/res-auto"
+              xmlns:app="http://schemas.android.com/tools"
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
@@ -21,23 +21,105 @@
             bootstrap:bb_icon_right="fa-android"
             bootstrap:bb_type="default"
             />
+        <com.beardedhen.androidbootstrap.BootstrapButton
+            android:id="@+id/add_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="Des"
+            bootstrap:bb_icon_right="fa-check"
+            bootstrap:bb_type="default"
+            />
+        <com.beardedhen.androidbootstrap.BootstrapButton
+            android:id="@+id/save_entry"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="OK"
+            bootstrap:bb_icon_right="fa-check"
+            bootstrap:bb_type="default"
+            />
     </LinearLayout>
 
-    <com.beardedhen.androidbootstrap.BootstrapThumbnail
-        android:id="@+id/thumbnailTwo"
+    <com.github.siyamed.shapeimageview.RoundedImageView
+        android:id="@+id/pic_selector"
+        android:layout_width="320dp"
+        android:layout_height="200dp"
+        android:layout_gravity="center"
+        android:src="@drawable/cat"
+        app:siBorderWidth="2dp"
+        app:siBorderColor="#000000"
+        app:siSquare="true"/>
+
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
-        bootstrapthumbnail:bt_width="320dp"
-        bootstrapthumbnail:bt_height="200dp"/>
+        android:text="Name:"
+        android:layout_marginLeft="20dp"
+        android:textSize="25sp"/>
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/name"/>
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="10dp"
+        android:textCursorDrawable="@null"
+        android:id="@+id/name_input"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Address:"
+        android:layout_marginLeft="20dp"
+        android:textSize="25sp"/>
+
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/description"/>
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="10dp"
+        android:textCursorDrawable="@null"
+        android:id="@+id/address_input"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <com.beardedhen.androidbootstrap.BootstrapButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="ChooseTime"
+                bootstrap:bb_icon_right="fa-check"
+                bootstrap:bb_type="default"
+                android:id="@+id/choose_time"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Budget"
+                android:layout_marginBottom="3dp"
+                android:layout_gravity="bottom"
+                android:textSize="16sp"
+                android:layout_margin="10dp"/>
+            <TextView
+                android:id="@+id/money_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="100 Y"
+                android:layout_gravity="bottom"
+                android:textSize="25sp"
+                android:layout_margin="10dp"/>
+        </LinearLayout>
+    <SeekBar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/adjust_money"
+        android:max="1000"/>
+
 </LinearLayout>

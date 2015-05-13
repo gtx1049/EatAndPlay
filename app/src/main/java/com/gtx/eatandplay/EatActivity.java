@@ -40,9 +40,15 @@ public class EatActivity extends ActionBarActivity
             public void onClick(View v)
             {
                 Intent intent = new Intent(EatActivity.this, AddActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent, 0);
             }
         });
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent intent)
+    {
+
     }
 
 }
