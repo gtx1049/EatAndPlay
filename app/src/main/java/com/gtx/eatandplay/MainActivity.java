@@ -19,6 +19,8 @@ public class MainActivity extends TabActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Entry.initialDatabase(this);
+
         mTabHost = this.getTabHost();
         mTabHost.setup(this.getLocalActivityManager());
 
@@ -38,7 +40,6 @@ public class MainActivity extends TabActivity
                 .setIndicator(null, getResources().getDrawable(R.drawable.happy))
                 .setContent(R.id.happy));
 
-        Entry.initialDatabase(this);
     }
 
 }

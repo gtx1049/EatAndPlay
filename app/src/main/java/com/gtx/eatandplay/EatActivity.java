@@ -12,6 +12,10 @@ import com.daimajia.swipe.SwipeLayout;
 import com.gtx.controll.CommonListener;
 import com.gtx.controll.CommonViewAdapter;
 import com.gtx.controll.CommonViewClicker;
+import com.gtx.model.Entry;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class EatActivity extends ActionBarActivity
@@ -30,8 +34,10 @@ public class EatActivity extends ActionBarActivity
         //swipeLayout.setShowMode(SwipeLayout.ShowMode.LayDown);
         //swipeLayout.addSwipeListener(new CommonListener());
 
+        List<Entry> entryList;
+        entryList = Entry.getEntrylist(Entry.EAT_TYPE);
         list = (ListView)findViewById(R.id.common_list);
-        list.setAdapter(new CommonViewAdapter(this));
+        list.setAdapter(new CommonViewAdapter(this, entryList));
 
         add = (BootstrapButton)findViewById(R.id.add_food);
         add.setOnClickListener(new View.OnClickListener()

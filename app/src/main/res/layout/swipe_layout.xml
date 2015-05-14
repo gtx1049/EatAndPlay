@@ -23,15 +23,28 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <!--What you want to show in SurfaceView-->
+
         <TextView
-            android:id="@+id/position"
+            android:id="@+id/name_display"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:padding="10dp"/>
         <TextView
-            android:tag="Hover"
-            android:text="One One One \n"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:id="@+id/address_display"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"/>
+        <TextView
+            android:id="@+id/money_display"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"/>
+        <TextView
+            android:id="@+id/time_display"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"/>
+
     </LinearLayout>
     <!-- Surface View End -->
 </com.daimajia.swipe.SwipeLayout>

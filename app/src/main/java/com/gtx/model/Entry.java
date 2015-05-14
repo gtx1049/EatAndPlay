@@ -3,12 +3,16 @@ package com.gtx.model;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
+import android.widget.ListView;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Administrator on 2015/5/12.
@@ -20,6 +24,7 @@ public class Entry
     public static final int PLAY_TYPE = 3;
     public static final int HAPPY_TYPE = 4;
 
+    public static final String TABLE = "entry";
     public static final String KEY_NAME = "name";
     public static final String KEY_DESCRIPTION = "description";
     public static final String KEY_ADDRESS = "address";
@@ -41,6 +46,7 @@ public class Entry
     private static String CRATE = "CREATE TABLE entry (id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                                                        "name VARCHAR, description VARCHAR, address VARCHAR," +
                                                        "predate DATE, money INTEGER, image VARCHAR, type INTEGER)";
+    private static String QUERY = "select * from entry where type=?";
 
     public Entry(String name, String address, String description, Date date, int money)
     {
@@ -53,7 +59,7 @@ public class Entry
 
     public boolean saveSelf()
     {
-        DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        DateFormat format = new SimpleDateFormat(Constant.TIME_FORMAT);
 
         ContentValues values = new ContentValues();
 
@@ -67,7 +73,7 @@ public class Entry
 
         if(db != null)
         {
-            long id = db.insert("entry", null, values);
+            long id = db.insert(TABLE, null, values);
             System.out.println(id);
         }
 
@@ -146,18 +152,53 @@ public class Entry
 
     public static boolean initialDatabase(Context context)
     {
-        db = context.openOrCreateDatabase("eat_play.db", Context.MODE_PRIVATE, null);
-        SharedPreferences preferences = context.getSharedPreferences("eat_play", Context.MODE_PRIVATE);
-        if(preferences.getBoolean("is_first", false) == false)
+        db = context.openOrCreateDatabase(Constant.DATABASE, Context.MODE_PRIVATE, null);
+        SharedPreferences preferences = context.getSharedPreferences(Constant.SP, Context.MODE_PRIVATE);
+        if(preferences.getBoolean(Constant.FIRST_FLAG, false) == false)
         {
-            System.out.println("first create");
+
             db.execSQL(CRATE);
             SharedPreferences.Editor editor = preferences.edit();
-            editor.putBoolean("is_first", true);
+            editor.putBoolean(Constant.FIRST_FLAG, true);
             editor.commit();
-        }else
-            System.out.println("first create");
+        }
 
         return true;
+    }
+
+    public static List<Entry> getEntrylist(Integer type)
+    {
+        List<Entry> entryList = new ArrayList<>();
+
+
+        Cursor cursor = db.rawQuery(QUERY, new String[]{type.toString()});
+
+        while (cursor.moveToNext())
+        {
+            String name = cursor.getString(cursor.getColumnIndex(KEY_NAME));
+            String description = cursor.getString(cursor.getColumnIndex(KEY_DESCRIPTION));
+            String strdate = cursor.getString(cursor.getColumnIndex(KEY_DATE));
+            String address = cursor.getString(cursor.getColumnIndex(KEY_ADDRESS));
+            int money = cursor.getInt(cursor.getColumnIndex(KEY_MONEY));
+            String image = cursor.getString(cursor.getColumnIndex(KEY_IMAGE));
+
+            Date date = new Date();
+            try
+            {
+                SimpleDateFormat sdf = new SimpleDateFormat(Constant.TIME_FORMAT);
+                date = sdf.parse(strdate);
+            }catch (Exception e)
+            {
+                e.printStackTrace();
+            }
+
+
+            Entry entry = new Entry(name, address, description, date, money);
+            entry.setBitmap(image);
+
+            entryList.add(entry);
+        }
+
+        return entryList;
     }
 }
