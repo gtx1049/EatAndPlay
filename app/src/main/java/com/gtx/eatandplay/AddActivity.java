@@ -101,6 +101,10 @@ public class AddActivity extends ActionBarActivity
                 entry.setBitmap(bitmap);
                 entry.saveSelf();
 
+                Intent intent = new Intent();
+                intent.putExtra(Constant.ENTRY, entry);
+                setResult(Constant.RESULT_ADD, intent);
+
                 finish();
 
             }

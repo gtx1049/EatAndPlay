@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.widget.ListView;
 
+import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -17,7 +18,7 @@ import java.util.List;
 /**
  * Created by Administrator on 2015/5/12.
  */
-public class Entry
+public class Entry implements Serializable
 {
     public static final int EAT_TYPE = 1;
     public static final int DRINK_TYPE = 2;

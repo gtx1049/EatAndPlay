@@ -12,6 +12,7 @@ import com.daimajia.swipe.SwipeLayout;
 import com.gtx.controll.CommonListener;
 import com.gtx.controll.CommonViewAdapter;
 import com.gtx.controll.CommonViewClicker;
+import com.gtx.model.Constant;
 import com.gtx.model.Entry;
 
 import java.util.ArrayList;
@@ -23,6 +24,8 @@ public class EatActivity extends ActionBarActivity
     private SwipeLayout swipeLayout;
     private ListView list;
     private BootstrapButton add;
+
+    private CommonViewAdapter cva;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -37,7 +40,8 @@ public class EatActivity extends ActionBarActivity
         List<Entry> entryList;
         entryList = Entry.getEntrylist(Entry.EAT_TYPE);
         list = (ListView)findViewById(R.id.common_list);
-        list.setAdapter(new CommonViewAdapter(this, entryList));
+        cva = new CommonViewAdapter(this, entryList);
+        list.setAdapter(cva);
 
         add = (BootstrapButton)findViewById(R.id.add_food);
         add.setOnClickListener(new View.OnClickListener()
@@ -54,6 +58,12 @@ public class EatActivity extends ActionBarActivity
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent intent)
     {
+        if(resultCode == Constant.RESULT_ADD)
+        {
+            Entry entry = (Entry)intent.getSerializableExtra(Constant.ENTRY);
+            cva.addEntry(entry);
+            cva.notifyDataSetChanged();
+        }
 
     }
 

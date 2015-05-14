@@ -8,6 +8,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import com.daimajia.swipe.SwipeLayout;
@@ -53,6 +54,8 @@ public class CommonViewAdapter extends BaseSwipeAdapter
         swipeLayout.setShowMode(SwipeLayout.ShowMode.LayDown);
         swipeLayout.addSwipeListener(new CommonListener());
 
+        i = entryList.size() - i - 1;
+
         TextView nameview = (TextView)view.findViewById(R.id.name_display);
         nameview.setText(entryList.get(i).getName());
 
@@ -84,5 +87,10 @@ public class CommonViewAdapter extends BaseSwipeAdapter
     public long getItemId(int position)
     {
         return position;
+    }
+
+    public void addEntry(Entry entry)
+    {
+        entryList.add(entry);
     }
 }
