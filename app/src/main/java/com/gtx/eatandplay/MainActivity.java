@@ -24,21 +24,27 @@ public class MainActivity extends TabActivity
         mTabHost = this.getTabHost();
         mTabHost.setup(this.getLocalActivityManager());
 
-        Intent intent =new Intent();
-        intent.setClass(this, EatActivity.class);
+        Intent eatintent =new Intent();
+        eatintent.setClass(this, EatActivity.class);
+        Intent drinkintent =new Intent();
+        drinkintent.setClass(this, DrinkActivity.class);
+        Intent playintent =new Intent();
+        playintent.setClass(this, PlayActivity.class);
+        Intent happyintent =new Intent();
+        happyintent.setClass(this, HappyActivity.class);
 
         mTabHost.addTab(mTabHost.newTabSpec("EAT")
                 .setIndicator(null, getResources().getDrawable(R.drawable.food))
-                .setContent(intent));
-        mTabHost.addTab(mTabHost.newTabSpec("EAT")
+                .setContent(eatintent));
+        mTabHost.addTab(mTabHost.newTabSpec("DRINK")
                 .setIndicator(null, getResources().getDrawable(R.drawable.drink))
-                .setContent(R.id.drink));
-        mTabHost.addTab(mTabHost.newTabSpec("EAT")
+                .setContent(drinkintent));
+        mTabHost.addTab(mTabHost.newTabSpec("PLAY")
                 .setIndicator(null, getResources().getDrawable(R.drawable.play))
-                .setContent(R.id.play));
-        mTabHost.addTab(mTabHost.newTabSpec("EAT")
+                .setContent(playintent));
+        mTabHost.addTab(mTabHost.newTabSpec("HAPPY")
                 .setIndicator(null, getResources().getDrawable(R.drawable.happy))
-                .setContent(R.id.happy));
+                .setContent(happyintent));
 
     }
 

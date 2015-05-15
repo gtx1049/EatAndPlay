@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:bootstrap="http://schemas.android.com/apk/res-auto"
+
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <LinearLayout
+        android:id="@+id/top_control_play"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignParentTop="true"
+        >
+        <com.beardedhen.androidbootstrap.BootstrapButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="Success"
+            bootstrap:bb_icon_right="fa-android"
+            bootstrap:bb_type="default"
+            />
+        <com.beardedhen.androidbootstrap.BootstrapButton
+            android:id="@+id/add_play"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="ADD"
+            bootstrap:bb_icon_right="fa-plus"
+            bootstrap:bb_type="default"
+            />
+    </LinearLayout>
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/common_list_play"
+        android:layout_weight="1"
+        android:divider="#00000000"
+        android:dividerHeight="18dp"
+        android:layout_marginBottom="60dp"/>
+</LinearLayout>

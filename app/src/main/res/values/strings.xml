@@ -7,4 +7,7 @@
     <string name="title_activity_add">AddActivity</string>
     <string name="title_activity_time">TimeActivity</string>
     <string name="title_activity_description">DescriptionActivity</string>
+    <string name="title_activity_drink">DrinkActivity</string>
+    <string name="title_activity_play">PlayActivity</string>
+    <string name="title_activity_happy">HappyActivity</string>
 </resources>

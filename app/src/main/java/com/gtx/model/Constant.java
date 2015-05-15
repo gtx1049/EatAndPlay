@@ -5,6 +5,9 @@ package com.gtx.model;
  */
 public class Constant
 {
+    public static final String TYPE = "type";
+
+
     public static final int RESULT_DATE = 1;
     public static final String DATE_TAG = "date";
 

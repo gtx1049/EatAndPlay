@@ -97,7 +97,7 @@ public class AddActivity extends ActionBarActivity
                 int money = adjustmoney.getProgress();
 
                 Entry entry = new Entry(name, address, strdescription, date, money);
-                entry.setType(Entry.EAT_TYPE);
+                entry.setType(getIntent().getIntExtra(Constant.TYPE, 0));
                 entry.setBitmap(bitmap);
                 entry.saveSelf();
 
@@ -179,6 +179,11 @@ public class AddActivity extends ActionBarActivity
         else if(requestCode == Constant.RESULT_PIC)
         {
             Uri image = intent.getData();
+
+            if(image == null)
+            {
+                return;
+            }
 
             String[] filePathColumn = { MediaStore.Images.Media.DATA };
 

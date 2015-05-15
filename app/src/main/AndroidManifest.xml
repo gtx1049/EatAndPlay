@@ -36,6 +36,18 @@
             android:name=".DescriptionActivity"
             android:label="@string/title_activity_description" >
         </activity>
+        <activity
+            android:name=".DrinkActivity"
+            android:label="@string/title_activity_drink" >
+        </activity>
+        <activity
+            android:name=".PlayActivity"
+            android:label="@string/title_activity_play" >
+        </activity>
+        <activity
+            android:name=".HappyActivity"
+            android:label="@string/title_activity_happy" >
+        </activity>
     </application>
 
 </manifest>
