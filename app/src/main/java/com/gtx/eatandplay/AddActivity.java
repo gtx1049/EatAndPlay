@@ -96,6 +96,12 @@ public class AddActivity extends ActionBarActivity
                 String address = addressinput.getText().toString();
                 int money = adjustmoney.getProgress();
 
+                if (name.length() == 0)
+                {
+                    finish();
+                    return;
+                }
+
                 Entry entry = new Entry(name, address, strdescription, date, money);
                 entry.setType(getIntent().getIntExtra(Constant.TYPE, 0));
                 entry.setBitmap(bitmap);

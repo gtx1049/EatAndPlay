@@ -2,11 +2,13 @@ package com.gtx.controll;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.media.Image;
 import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -69,6 +71,15 @@ public class CommonViewAdapter extends BaseSwipeAdapter
         TextView moneyview = (TextView)view.findViewById(R.id.money_display);
         moneyview.setText(entryList.get(i).getMoney() + Constant.YUAN);
 
+        ButtonListener buttonListener = new ButtonListener();
+        ImageButton editentry = (CusImageButton)view.findViewById(R.id.edit_entry);
+        editentry.setId(i);
+        editentry.setOnClickListener(buttonListener);
+
+        ImageButton deleteentry = (CusImageButton)view.findViewById(R.id.delete_entry);
+        deleteentry.setId(i);
+        deleteentry.setOnClickListener(buttonListener);
+
     }
 
     @Override
@@ -92,5 +103,17 @@ public class CommonViewAdapter extends BaseSwipeAdapter
     public void addEntry(Entry entry)
     {
         entryList.add(entry);
+    }
+
+    public class ButtonListener implements View.OnClickListener
+    {
+
+        @Override
+        public void onClick(View v)
+        {
+            CusImageButton civ = (CusImageButton)v;
+            int id = civ.getId();
+            int entrid = civ.getentryId();
+        }
     }
 }

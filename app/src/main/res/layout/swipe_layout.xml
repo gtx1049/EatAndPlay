@@ -7,12 +7,23 @@
     <LinearLayout
         android:background="#66ddff00"
         android:id="@+id/bottom_wrapper"
-        android:layout_width="100dp"
-        android:weightSum="1"
+        android:layout_width="180dp"
         android:orientation="horizontal"
         android:gravity="center"
         android:layout_height="120dp">
         <!--What you want to show-->
+        <com.gtx.controll.CusImageButton
+            android:id="@+id/edit_entry"
+            android:layout_width="90dp"
+            android:layout_height="120dp"
+            android:background="#66ddff00"
+            android:text="Edit"/>
+        <com.gtx.controll.CusImageButton
+            android:id="@+id/delete_entry"
+            android:layout_width="90dp"
+            android:layout_height="120dp"
+            android:background="#66ffaa00"
+            android:text="Delete"/>
     </LinearLayout>
     <!-- Bottom View End-->
 
