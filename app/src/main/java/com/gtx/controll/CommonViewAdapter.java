@@ -72,12 +72,12 @@ public class CommonViewAdapter extends BaseSwipeAdapter
         moneyview.setText(entryList.get(i).getMoney() + Constant.YUAN);
 
         ButtonListener buttonListener = new ButtonListener();
-        ImageButton editentry = (CusImageButton)view.findViewById(R.id.edit_entry);
-        editentry.setId(i);
+        CusImageButton editentry = (CusImageButton)view.findViewById(R.id.edit_entry);
+        editentry.setentryId(i);
         editentry.setOnClickListener(buttonListener);
 
-        ImageButton deleteentry = (CusImageButton)view.findViewById(R.id.delete_entry);
-        deleteentry.setId(i);
+        CusImageButton deleteentry = (CusImageButton)view.findViewById(R.id.delete_entry);
+        deleteentry.setentryId(i);
         deleteentry.setOnClickListener(buttonListener);
 
     }

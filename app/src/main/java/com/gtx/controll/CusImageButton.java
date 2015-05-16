@@ -5,10 +5,12 @@ import android.media.Image;
 import android.util.AttributeSet;
 import android.widget.ImageButton;
 
+import com.beardedhen.androidbootstrap.FontAwesomeText;
+
 /**
  * Created by Administrator on 2015/5/15.
  */
-public class CusImageButton extends ImageButton
+public class CusImageButton extends FontAwesomeText
 {
     public int entryid;
 

@@ -1,5 +1,6 @@
 <com.daimajia.swipe.SwipeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                                 xmlns:app="http://schemas.android.com/tools"
+                                xmlns:fontawesometext="http://schemas.android.com/apk/res-auto"
                                 android:layout_width="match_parent"
                                 android:layout_height="120dp"
                                 android:id="@+id/swipe">
@@ -17,13 +18,16 @@
             android:layout_width="90dp"
             android:layout_height="120dp"
             android:background="#66ddff00"
-            android:text="Edit"/>
+            fontawesometext:fa_icon="fa-github"
+            android:textSize="32sp"/>
+
         <com.gtx.controll.CusImageButton
             android:id="@+id/delete_entry"
             android:layout_width="90dp"
             android:layout_height="120dp"
             android:background="#66ffaa00"
-            android:text="Delete"/>
+            fontawesometext:fa_icon="fa-github"
+            android:textSize="32sp"/>
     </LinearLayout>
     <!-- Bottom View End-->
 
