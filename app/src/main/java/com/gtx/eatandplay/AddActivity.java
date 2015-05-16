@@ -16,6 +16,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.beardedhen.androidbootstrap.BootstrapButton;
 import com.beardedhen.androidbootstrap.BootstrapThumbnail;
@@ -98,8 +99,14 @@ public class AddActivity extends ActionBarActivity
 
                 if (name.length() == 0)
                 {
+                    Toast.makeText(AddActivity.this, Constant.ADD_HINT, Toast.LENGTH_SHORT);
                     finish();
                     return;
+                }
+
+                if(dateflag == false)
+                {
+                    date = new Date();
                 }
 
                 Entry entry = new Entry(name, address, strdescription, date, money);

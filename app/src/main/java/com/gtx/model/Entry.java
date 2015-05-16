@@ -26,6 +26,7 @@ public class Entry implements Serializable
     public static final int HAPPY_TYPE = 4;
 
     public static final String TABLE = "entry";
+    public static final String KEY_ID = "id";
     public static final String KEY_NAME = "name";
     public static final String KEY_DESCRIPTION = "description";
     public static final String KEY_ADDRESS = "address";
@@ -36,6 +37,7 @@ public class Entry implements Serializable
 
     private static SQLiteDatabase db = null;
 
+    private int id;
     private String name;
     private String description;
     private String address;
@@ -44,10 +46,24 @@ public class Entry implements Serializable
     private String bitmap;
     private int type;
 
+    private static int max_id = Constant.VOID;
+
     private static String CRATE = "CREATE TABLE entry (id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                                                        "name VARCHAR, description VARCHAR, address VARCHAR," +
                                                        "predate DATE, money INTEGER, image VARCHAR, type INTEGER)";
     private static String QUERY = "select * from entry where type=?";
+    private static String DELETE = "id=?";
+    private static String MAX_ID = "select max(id) as id from entry";
+
+    public Entry(int id, String name, String address, String description, Date date, int money)
+    {
+        this.id = id;
+        this.name = name;
+        this.address = address;
+        this.description = description;
+        this.date = date;
+        this.money = money;
+    }
 
     public Entry(String name, String address, String description, Date date, int money)
     {
@@ -56,6 +72,7 @@ public class Entry implements Serializable
         this.description = description;
         this.date = date;
         this.money = money;
+
     }
 
     public boolean saveSelf()
@@ -74,11 +91,35 @@ public class Entry implements Serializable
 
         if(db != null)
         {
-            long id = db.insert(TABLE, null, values);
-            System.out.println(id);
+            db.insert(TABLE, null, values);
+
+            if(max_id == Constant.VOID)
+            {
+                Cursor cursor = db.rawQuery(MAX_ID, null);
+                cursor.moveToFirst();
+                max_id = cursor.getInt(cursor.getColumnIndex(KEY_ID)) - 1;
+            }
+            max_id += 1;
+            this.id = max_id;
         }
 
         return true;
+    }
+
+    public boolean deleteSelf()
+    {
+        db.delete(TABLE, DELETE, new String[]{new Integer(id).toString()});
+        return true;
+    }
+
+    public int getId()
+    {
+        return id;
+    }
+
+    public void setId(int id)
+    {
+        this.id = id;
     }
 
     public String getName()
@@ -176,6 +217,7 @@ public class Entry implements Serializable
 
         while (cursor.moveToNext())
         {
+            int id = cursor.getInt(cursor.getColumnIndex(KEY_ID));
             String name = cursor.getString(cursor.getColumnIndex(KEY_NAME));
             String description = cursor.getString(cursor.getColumnIndex(KEY_DESCRIPTION));
             String strdate = cursor.getString(cursor.getColumnIndex(KEY_DATE));
@@ -194,7 +236,7 @@ public class Entry implements Serializable
             }
 
 
-            Entry entry = new Entry(name, address, description, date, money);
+            Entry entry = new Entry(id, name, address, description, date, money);
             entry.setBitmap(image);
 
             entryList.add(entry);

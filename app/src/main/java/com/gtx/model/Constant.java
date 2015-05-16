@@ -7,6 +7,7 @@ public class Constant
 {
     public static final String TYPE = "type";
 
+    public static final int VOID = -1;
 
     public static final int RESULT_DATE = 1;
     public static final String DATE_TAG = "date";
@@ -27,4 +28,7 @@ public class Constant
     public static final String YUAN = " Y";
 
     public static final String ENTRY = "entry";
+
+    public static final String HINT = "左滑条目更多操作";
+    public static final String ADD_HINT = "至少填写名字";
 }
