@@ -26,6 +26,8 @@ import com.gtx.model.Constant;
 import com.gtx.model.Entry;
 import com.squareup.timessquare.CalendarPickerView;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -50,6 +52,8 @@ public class AddActivity extends ActionBarActivity
 
     private boolean dateflag;
     private boolean descriptionflag;
+
+    private Entry pastentry;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -88,41 +92,6 @@ public class AddActivity extends ActionBarActivity
             }
         });
 
-        saveentry.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
-            {
-                String name = nameinput.getText().toString();
-                String address = addressinput.getText().toString();
-                int money = adjustmoney.getProgress();
-
-                if (name.length() == 0)
-                {
-                    Toast.makeText(AddActivity.this, Constant.ADD_HINT, Toast.LENGTH_SHORT);
-                    finish();
-                    return;
-                }
-
-                if(dateflag == false)
-                {
-                    date = new Date();
-                }
-
-                Entry entry = new Entry(name, address, strdescription, date, money);
-                entry.setType(getIntent().getIntExtra(Constant.TYPE, 0));
-                entry.setBitmap(bitmap);
-                entry.saveSelf();
-
-                Intent intent = new Intent();
-                intent.putExtra(Constant.ENTRY, entry);
-                setResult(Constant.RESULT_ADD, intent);
-
-                finish();
-
-            }
-        });
-
         descriptionflag = false;
         description.setOnClickListener(new View.OnClickListener()
         {
@@ -148,7 +117,7 @@ public class AddActivity extends ActionBarActivity
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser)
             {
-                moneyvalue.setText(progress + " Y");
+                moneyvalue.setText(progress + Constant.YUAN);
             }
 
             @Override
@@ -173,6 +142,42 @@ public class AddActivity extends ActionBarActivity
                 startActivityForResult(intent, Constant.RESULT_PIC);
             }
         });
+
+        pastentry = (Entry)getIntent().getSerializableExtra(Entry.KEY_ID);
+        if(pastentry == null)
+        {
+            saveentry.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    saveEntry();
+                }
+            });
+        }
+        else
+        {
+            DateFormat format = new SimpleDateFormat(Constant.TIME_FORMAT_DIS);
+            nameinput.setText(pastentry.getName());
+            addressinput.setText(pastentry.getAddress());
+            moneyvalue.setText(pastentry.getMoney() + Constant.YUAN);
+            adjustmoney.setProgress(pastentry.getMoney());
+            choosetime.setText(format.format(pastentry.getDate()));
+            strdescription = pastentry.getDescription();
+            bitmap = pastentry.getBitmap();
+            date = pastentry.getDate();
+            dateflag = true;
+            descriptionflag = true;
+
+            saveentry.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    saveEntry(pastentry);
+                }
+            });
+        }
     }
 
     @Override
@@ -180,8 +185,9 @@ public class AddActivity extends ActionBarActivity
     {
         if(resultCode == Constant.RESULT_DATE)
         {
+            DateFormat format = new SimpleDateFormat(Constant.TIME_FORMAT_DIS);
             date = (Date)intent.getSerializableExtra(Constant.DATE_TAG);
-            choosetime.setText((date.getYear() + 1900) + "." + (date.getMonth() + 1) + "." + date.getDate());
+            choosetime.setText(format.format(date));
             dateflag = true;
         }
         else if(resultCode == Constant.RESULT_DES)
@@ -210,5 +216,69 @@ public class AddActivity extends ActionBarActivity
             bitmap = picturePath;
             picselector.setImageBitmap(BitmapUtils.decodeSampledBitmapFromFile(picturePath, picselector.getWidth(), picselector.getHeight()));
         }
+    }
+
+    private void saveEntry()
+    {
+        String name = nameinput.getText().toString();
+        String address = addressinput.getText().toString();
+        int money = adjustmoney.getProgress();
+
+        if (name.length() == 0)
+        {
+            Toast.makeText(AddActivity.this, Constant.ADD_HINT, Toast.LENGTH_SHORT);
+            finish();
+            return;
+        }
+
+        if (dateflag == false)
+        {
+            date = new Date();
+        }
+
+        Entry entry = new Entry(name, address, strdescription, date, money);
+        entry.setType(getIntent().getIntExtra(Constant.TYPE, 0));
+        entry.setBitmap(bitmap);
+        entry.saveSelf();
+
+        Intent intent = new Intent();
+        intent.putExtra(Constant.ENTRY, entry);
+        setResult(Constant.RESULT_ADD, intent);
+
+        finish();
+    }
+
+    private void saveEntry(Entry entry)
+    {
+        String name = nameinput.getText().toString();
+        String address = addressinput.getText().toString();
+        int money = adjustmoney.getProgress();
+
+        if (name.length() == 0)
+        {
+            Toast.makeText(AddActivity.this, Constant.ADD_HINT, Toast.LENGTH_SHORT);
+            finish();
+            return;
+        }
+
+        if (dateflag == false)
+        {
+            date = new Date();
+        }
+
+        entry.setName(name);
+        entry.setAddress(address);
+        entry.setMoney(money);
+        entry.setDate(date);
+        entry.setDescription(strdescription);
+        entry.setBitmap(bitmap);
+
+        entry.updateSelf();
+
+        Intent intent = new Intent();
+        intent.putExtra(Constant.ENTRY, entry);
+        setResult(Constant.RESULT_UPDATE, intent);
+
+        finish();
     }
 }

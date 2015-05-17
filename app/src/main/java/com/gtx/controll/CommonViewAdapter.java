@@ -1,6 +1,8 @@
 package com.gtx.controll;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.media.Image;
 import android.text.Layout;
@@ -15,6 +17,7 @@ import android.widget.TextView;
 
 import com.daimajia.swipe.SwipeLayout;
 import com.daimajia.swipe.adapters.BaseSwipeAdapter;
+import com.gtx.eatandplay.AddActivity;
 import com.gtx.eatandplay.R;
 import com.gtx.model.Constant;
 import com.gtx.model.Entry;
@@ -33,12 +36,14 @@ public class CommonViewAdapter extends BaseSwipeAdapter
     private Context context;
     private List<Entry> entryList;
     private ButtonListener buttonListener;
+    private int entrytype;
 
-    public CommonViewAdapter(Context context, List<Entry> entryList)
+    public CommonViewAdapter(Context context, List<Entry> entryList, int entrytype)
     {
         this.context = context;
         this.entryList = entryList;
         buttonListener = new ButtonListener(this);
+        this.entrytype = entrytype;
     }
 
     @Override
@@ -122,6 +127,24 @@ public class CommonViewAdapter extends BaseSwipeAdapter
         }
     }
 
+    public Entry findEntry(int id)
+    {
+        for(int i = 0; i < entryList.size(); i++)
+        {
+            if(entryList.get(i).getId() == id)
+            {
+                return entryList.get(i);
+            }
+        }
+        return  null;
+    }
+
+    public void updateEntry(Entry entry)
+    {
+        Entry target = findEntry(entry.getId());
+        target.copyEntry(entry);
+    }
+
     public class ButtonListener implements View.OnClickListener
     {
         private  CommonViewAdapter cva;
@@ -175,7 +198,10 @@ public class CommonViewAdapter extends BaseSwipeAdapter
             }
             else if(id == R.id.edit_entry)
             {
-
+                Intent intent = new Intent(context, AddActivity.class);
+                intent.putExtra(Constant.TYPE, entrytype);
+                intent.putExtra(Entry.KEY_ID, cva.findEntry(entryid));
+                ((Activity)context).startActivityForResult(intent, Constant.REQUEST_EDIT);
             }
         }
     }

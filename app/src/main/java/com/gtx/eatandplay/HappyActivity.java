@@ -35,7 +35,7 @@ public class HappyActivity extends ActionBarActivity
         List<Entry> entryList;
         entryList = Entry.getEntrylist(Entry.HAPPY_TYPE);
         list = (ListView)findViewById(R.id.common_list_happy);
-        cva = new CommonViewAdapter(this, entryList);
+        cva = new CommonViewAdapter(this, entryList, Entry.HAPPY_TYPE);
         list.setAdapter(cva);
 
         add = (BootstrapButton)findViewById(R.id.add_happy);
@@ -60,6 +60,11 @@ public class HappyActivity extends ActionBarActivity
             cva.addEntry(entry);
             cva.notifyDataSetChanged();
         }
-
+        else if(resultCode == Constant.RESULT_UPDATE)
+        {
+            Entry entry = (Entry)intent.getSerializableExtra(Constant.ENTRY);
+            cva.updateEntry(entry);
+            cva.notifyDataSetChanged();
+        }
     }
 }

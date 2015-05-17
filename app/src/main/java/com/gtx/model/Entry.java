@@ -53,6 +53,7 @@ public class Entry implements Serializable
                                                        "predate DATE, money INTEGER, image VARCHAR, type INTEGER)";
     private static String QUERY = "select * from entry where type=?";
     private static String DELETE = "id=?";
+    private static String UPDATE = "id=?";
     private static String MAX_ID = "select max(id) as id from entry";
 
     public Entry(int id, String name, String address, String description, Date date, int money)
@@ -104,6 +105,34 @@ public class Entry implements Serializable
         }
 
         return true;
+    }
+
+    public boolean updateSelf()
+    {
+
+        DateFormat format = new SimpleDateFormat(Constant.TIME_FORMAT);
+
+        ContentValues values = new ContentValues();
+
+        values.put(KEY_NAME, name);
+        values.put(KEY_DATE, format.format(date));
+        values.put(KEY_DESCRIPTION, description);
+        values.put(KEY_ADDRESS, address);
+        values.put(KEY_MONEY, money);
+        values.put(KEY_IMAGE, bitmap);
+
+        db.update(TABLE, values, UPDATE, new String[]{new Integer(id).toString()});
+        return true;
+    }
+
+    public void copyEntry(Entry entry)
+    {
+        this.name = entry.getName();
+        this.address = entry.getAddress();
+        this.description = entry.getDescription();
+        this.date = entry.getDate();
+        this.money = entry.getMoney();
+        this.bitmap = entry.getBitmap();
     }
 
     public boolean deleteSelf()

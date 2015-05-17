@@ -36,7 +36,7 @@ public class EatActivity extends ActionBarActivity
         List<Entry> entryList;
         entryList = Entry.getEntrylist(Entry.EAT_TYPE);
         list = (ListView)findViewById(R.id.common_list);
-        cva = new CommonViewAdapter(this, entryList);
+        cva = new CommonViewAdapter(this, entryList, Entry.EAT_TYPE);
         list.setAdapter(cva);
 
         add = (BootstrapButton)findViewById(R.id.add_food);
@@ -61,7 +61,12 @@ public class EatActivity extends ActionBarActivity
             cva.addEntry(entry);
             cva.notifyDataSetChanged();
         }
-
+        else if(resultCode == Constant.RESULT_UPDATE)
+        {
+            Entry entry = (Entry)intent.getSerializableExtra(Constant.ENTRY);
+            cva.updateEntry(entry);
+            cva.notifyDataSetChanged();
+        }
     }
 
 }

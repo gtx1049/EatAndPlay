@@ -35,7 +35,7 @@ public class DrinkActivity extends ActionBarActivity
         List<Entry> entryList;
         entryList = Entry.getEntrylist(Entry.DRINK_TYPE);
         list = (ListView)findViewById(R.id.common_list_drink);
-        cva = new CommonViewAdapter(this, entryList);
+        cva = new CommonViewAdapter(this, entryList, Entry.DRINK_TYPE);
         list.setAdapter(cva);
 
         add = (BootstrapButton)findViewById(R.id.add_drink);
@@ -60,7 +60,12 @@ public class DrinkActivity extends ActionBarActivity
             cva.addEntry(entry);
             cva.notifyDataSetChanged();
         }
-
+        else if(resultCode == Constant.RESULT_UPDATE)
+        {
+            Entry entry = (Entry)intent.getSerializableExtra(Constant.ENTRY);
+            cva.updateEntry(entry);
+            cva.notifyDataSetChanged();
+        }
     }
 
 }

@@ -35,7 +35,7 @@ public class PlayActivity extends ActionBarActivity
         List<Entry> entryList;
         entryList = Entry.getEntrylist(Entry.PLAY_TYPE);
         list = (ListView)findViewById(R.id.common_list_play);
-        cva = new CommonViewAdapter(this, entryList);
+        cva = new CommonViewAdapter(this, entryList, Entry.PLAY_TYPE);
         list.setAdapter(cva);
 
         add = (BootstrapButton)findViewById(R.id.add_play);
@@ -60,6 +60,11 @@ public class PlayActivity extends ActionBarActivity
             cva.addEntry(entry);
             cva.notifyDataSetChanged();
         }
-
+        else if(resultCode == Constant.RESULT_UPDATE)
+        {
+            Entry entry = (Entry)intent.getSerializableExtra(Constant.ENTRY);
+            cva.updateEntry(entry);
+            cva.notifyDataSetChanged();
+        }
     }
 }
