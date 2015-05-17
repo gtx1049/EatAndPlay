@@ -1,6 +1,8 @@
 <com.daimajia.swipe.SwipeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                                 xmlns:app="http://schemas.android.com/tools"
                                 xmlns:fontawesometext="http://schemas.android.com/apk/res-auto"
+                                xmlns:tools="http://schemas.android.com/tools"
+                                tools:ignore="MissingPrefix"
                                 android:layout_width="match_parent"
                                 android:layout_height="120dp"
                                 android:id="@+id/swipe">
@@ -61,22 +63,30 @@
                 android:id="@+id/name_display"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="3dp"/>
+
+                android:textSize="20sp"
+                fontPath="fonts/FZMWFONT.TTF"/>
             <TextView
                 android:id="@+id/address_display"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="3dp"/>
+
+                android:textSize="20sp"
+                fontPath="fonts/FZMWFONT.TTF"/>
             <TextView
                 android:id="@+id/money_display"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="3dp"/>
+
+                android:textSize="20sp"
+                fontPath="fonts/FZMWFONT.TTF"/>
             <TextView
                 android:id="@+id/time_display"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="3dp"/>
+
+                android:textSize="20sp"
+                fontPath="fonts/FZMWFONT.TTF"/>
         </LinearLayout>
 
 

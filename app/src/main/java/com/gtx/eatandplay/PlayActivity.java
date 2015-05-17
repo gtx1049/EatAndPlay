@@ -1,5 +1,6 @@
 package com.gtx.eatandplay;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -15,6 +16,8 @@ import com.gtx.model.Constant;
 import com.gtx.model.Entry;
 
 import java.util.List;
+
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 
 public class PlayActivity extends ActionBarActivity
@@ -66,5 +69,11 @@ public class PlayActivity extends ActionBarActivity
             cva.updateEntry(entry);
             cva.notifyDataSetChanged();
         }
+    }
+
+    @Override
+    protected void attachBaseContext(Context newBase)
+    {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
     }
 }

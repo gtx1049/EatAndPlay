@@ -1,5 +1,6 @@
 package com.gtx.eatandplay;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -17,6 +18,9 @@ import com.gtx.model.Entry;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import uk.co.chrisjenx.calligraphy.CalligraphyConfig;
+import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 
 public class EatActivity extends ActionBarActivity
@@ -69,4 +73,9 @@ public class EatActivity extends ActionBarActivity
         }
     }
 
+    @Override
+    protected void attachBaseContext(Context newBase)
+    {
+        super.attachBaseContext(CalligraphyContextWrapper.wrap(newBase));
+    }
 }
