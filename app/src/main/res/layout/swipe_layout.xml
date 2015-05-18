@@ -63,29 +63,32 @@
                 android:id="@+id/name_display"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
+                android:layout_marginLeft="10dp"
                 android:textSize="20sp"
                 fontPath="fonts/FZMWFONT.TTF"/>
             <TextView
                 android:id="@+id/address_display"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="4dp"
                 android:textSize="20sp"
                 fontPath="fonts/FZMWFONT.TTF"/>
             <TextView
                 android:id="@+id/money_display"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="4dp"
                 android:textSize="20sp"
                 fontPath="fonts/FZMWFONT.TTF"/>
             <TextView
                 android:id="@+id/time_display"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
-                android:textSize="20sp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="4dp"
+                android:textSize="22sp"
                 fontPath="fonts/FZMWFONT.TTF"/>
         </LinearLayout>
 

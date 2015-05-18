@@ -25,6 +25,9 @@ public class Constant
     public static final int DP_WIDTH = 150;
     public static final int DP_HEIGHT = 100;
 
+    public static final int DP_WIDTH_L = 338;
+    public static final int DP_HEIGHT_L = 200;
+
     public static final String TIME_FORMAT = "yyyy-MM-dd";
     public static final String TIME_FORMAT_DIS = "yyyy.MM.dd";
 
@@ -35,7 +38,7 @@ public class Constant
     public static final String DATABASE = "eat_play.db";
     public static final String SP = "eat_play";
 
-    public static final String YUAN = " Y";
+    public static final String YUAN = " ¥";
 
     public static final String ENTRY = "entry";
 

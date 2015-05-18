@@ -17,8 +17,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:text="Success"
-            bootstrap:bb_icon_right="fa-android"
+            android:text="吃吃吃"
+            bootstrap:bb_icon_right="fa-cutlery"
             bootstrap:bb_type="default"
             />
         <com.beardedhen.androidbootstrap.BootstrapButton
@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:layout_alignParentRight="true"
-            android:text="ADD"
+            android:text="添加"
             bootstrap:bb_icon_right="fa-plus"
             bootstrap:bb_type="default"
             />

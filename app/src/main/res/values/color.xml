@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="delete_press">#7fff00ff</color>
+    <color name="edit_press">#33CC00</color>
+    <color name="edit_unpress">#99CC33</color>
+    <color name="delete_press">#CC3300</color>
+    <color name="delete_unpress">#FF6633</color>
 </resources>

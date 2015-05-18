@@ -35,6 +35,7 @@ public class AddActivity extends ActionBarActivity
     private BootstrapButton choosetime;
     private BootstrapButton saveentry;
     private BootstrapButton description;
+    private BootstrapButton addback;
 
     private RoundedImageView picselector;
 
@@ -62,6 +63,7 @@ public class AddActivity extends ActionBarActivity
         choosetime = (BootstrapButton)findViewById(R.id.choose_time);
         saveentry = (BootstrapButton)findViewById(R.id.save_entry);
         description = (BootstrapButton)findViewById(R.id.add_description);
+        addback = (BootstrapButton)findViewById(R.id.add_back);
 
         picselector = (RoundedImageView)findViewById(R.id.pic_selector);
 
@@ -159,6 +161,8 @@ public class AddActivity extends ActionBarActivity
             strdescription = pastentry.getDescription();
             bitmap = pastentry.getBitmap();
             date = pastentry.getDate();
+            Bitmap image = BitmapFactory.decodeFile(bitmap);
+            picselector.setImageBitmap(ThumbnailUtils.extractThumbnail(image, dip2px(Constant.DP_WIDTH_L), dip2px(Constant.DP_HEIGHT_L)));
             dateflag = true;
             descriptionflag = true;
 
@@ -171,6 +175,15 @@ public class AddActivity extends ActionBarActivity
                 }
             });
         }
+
+        addback.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                finish();
+            }
+        });
     }
 
     @Override
@@ -279,5 +292,11 @@ public class AddActivity extends ActionBarActivity
         setResult(Constant.RESULT_UPDATE, intent);
 
         finish();
+    }
+
+    private int dip2px(float dpValue)
+    {
+        final float scale = this.getResources().getDisplayMetrics().density;
+        return (int) (dpValue * scale + 0.5f);
     }
 }

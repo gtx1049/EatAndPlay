@@ -186,7 +186,7 @@ public class CommonViewAdapter extends BaseSwipeAdapter
             if(id == R.id.delete_entry)
             {
                 SweetAlertDialog sweetAlertDialog = new SweetAlertDialog(cva.context, SweetAlertDialog.WARNING_TYPE);
-                sweetAlertDialog.setTitleText("确定要删除？");
+                sweetAlertDialog.setTitleText("确定要删除吗？");
                 sweetAlertDialog.setConfirmText("是");
                 sweetAlertDialog.setCancelText("取消");
 
@@ -239,7 +239,7 @@ public class CommonViewAdapter extends BaseSwipeAdapter
         {
             SweetAlertDialog sweetAlertDialog = new SweetAlertDialog(context, SweetAlertDialog.NORMAL_TYPE);
             sweetAlertDialog.setTitleText(entryList.get(i).getDescription());
-            sweetAlertDialog.setConfirmText("是");
+            sweetAlertDialog.setConfirmText("好的！");
             sweetAlertDialog.show();
         }
     }

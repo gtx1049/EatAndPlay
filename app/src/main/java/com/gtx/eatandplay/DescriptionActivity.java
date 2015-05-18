@@ -15,6 +15,7 @@ import com.gtx.model.Constant;
 public class DescriptionActivity extends ActionBarActivity
 {
     private BootstrapButton checkdes;
+    private BootstrapButton desback;
 
     private EditText editText;
     private String description;
@@ -47,6 +48,16 @@ public class DescriptionActivity extends ActionBarActivity
             editText.setText(description);
             editText.setSelection(description.length());
         }
+
+        desback = (BootstrapButton)findViewById(R.id.des_back);
+        desback.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                finish();
+            }
+        });
     }
 
 
