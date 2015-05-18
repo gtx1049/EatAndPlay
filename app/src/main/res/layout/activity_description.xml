@@ -1,15 +1,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:bootstrap="http://schemas.android.com/apk/res-auto"
-              xmlns:bootstrapthumbnail="http://schemas.android.com/apk/res-auto"
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/top_control_add"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_alignParentTop="true"
+        android:layout_marginBottom="10dp"
         >
         <com.beardedhen.androidbootstrap.BootstrapButton
             android:layout_width="wrap_content"
@@ -24,11 +24,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
+            android:layout_alignParentRight="true"
             android:text="OK"
             bootstrap:bb_icon_right="fa-check"
             bootstrap:bb_type="default"
             />
-    </LinearLayout>
+    </RelativeLayout>
 
     <EditText
         android:layout_width="match_parent"

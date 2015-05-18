@@ -5,12 +5,13 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/top_control_happy"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_alignParentTop="true"
+        android:layout_marginBottom="10dp"
         >
         <com.beardedhen.androidbootstrap.BootstrapButton
             android:layout_width="wrap_content"
@@ -26,14 +27,15 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:text="ADD"
+            android:layout_alignParentRight="true"
             bootstrap:bb_icon_right="fa-plus"
             bootstrap:bb_type="default"
             />
-    </LinearLayout>
+    </RelativeLayout>
 
     <ListView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="fill_parent"
         android:id="@+id/common_list_happy"
         android:layout_weight="1"
         android:divider="#00000000"

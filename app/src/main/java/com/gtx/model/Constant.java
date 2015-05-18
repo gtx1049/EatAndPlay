@@ -22,6 +22,9 @@ public class Constant
 
     public static final int REQUEST_EDIT = 6;
 
+    public static final int DP_WIDTH = 150;
+    public static final int DP_HEIGHT = 100;
+
     public static final String TIME_FORMAT = "yyyy-MM-dd";
     public static final String TIME_FORMAT_DIS = "yyyy.MM.dd";
 
@@ -38,4 +41,6 @@ public class Constant
 
     public static final String HINT = "左滑条目更多操作";
     public static final String ADD_HINT = "至少填写名字";
+
+    public static final int MAX_BOUNDS = 1500;
 }

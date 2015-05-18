@@ -3,14 +3,20 @@ package com.gtx.controll;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.media.Image;
+import android.media.ThumbnailUtils;
+import android.os.Handler;
+import android.os.Message;
 import android.text.Layout;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -89,6 +95,19 @@ public class CommonViewAdapter extends BaseSwipeAdapter
         deleteentry.setentryId(entryList.get(i).getId());
         deleteentry.setOnClickListener(buttonListener);
 
+        ImageView iv = (ImageView)view.findViewById(R.id.pic_entry);
+        String e = entryList.get(i).getBitmap();
+        if(e != null)
+        {
+            LoadImage li = new LoadImage(new UpdateHandler(iv), e);
+            li.start();
+        }
+        else
+        {
+            iv.setImageDrawable(context.getResources().getDrawable(R.drawable.cat));
+        }
+
+        iv.setOnClickListener(new ImageClickListener(i));
     }
 
     @Override
@@ -205,4 +224,77 @@ public class CommonViewAdapter extends BaseSwipeAdapter
             }
         }
     }
+
+    public class ImageClickListener implements View.OnClickListener
+    {
+        private int i;
+
+        public ImageClickListener(int i)
+        {
+            this.i = i;
+        }
+
+        @Override
+        public void onClick(View v)
+        {
+            SweetAlertDialog sweetAlertDialog = new SweetAlertDialog(context, SweetAlertDialog.NORMAL_TYPE);
+            sweetAlertDialog.setTitleText(entryList.get(i).getDescription());
+            sweetAlertDialog.setConfirmText("是");
+            sweetAlertDialog.show();
+        }
+    }
+
+    private int dip2px(float dpValue)
+    {
+        final float scale = context.getResources().getDisplayMetrics().density;
+        return (int) (dpValue * scale + 0.5f);
+    }
+
+    public class LoadImage extends Thread
+    {
+        Handler handler;
+        String bitmap;
+
+        public LoadImage(Handler handler, String bitmap)
+        {
+            this.bitmap = bitmap;
+            this.handler = handler;
+        }
+
+        public void run()
+        {
+            BitmapFactory.Options option = new BitmapFactory.Options();
+            option.inJustDecodeBounds = true;
+            BitmapFactory.decodeFile(bitmap, option);
+
+            if(option.outHeight > Constant.MAX_BOUNDS || option.outWidth > Constant.MAX_BOUNDS)
+            {
+                option.inSampleSize = 4;
+            }
+
+            option.inJustDecodeBounds = false;
+            Bitmap image = BitmapFactory.decodeFile(bitmap, option);
+
+            Message msg = new Message();
+            msg.obj = ThumbnailUtils.extractThumbnail(image, dip2px(Constant.DP_WIDTH), dip2px(Constant.DP_HEIGHT), ThumbnailUtils.OPTIONS_RECYCLE_INPUT);
+            handler.sendMessage(msg);
+        }
+    }
+
+    public class UpdateHandler extends Handler
+    {
+        private ImageView iv;
+
+        public UpdateHandler(ImageView iv)
+        {
+            this.iv = iv;
+        }
+
+        public void handleMessage(Message msg)
+        {
+            Bitmap bitmap = (Bitmap)msg.obj;
+            iv.setImageBitmap(bitmap);
+        }
+    }
+
 }

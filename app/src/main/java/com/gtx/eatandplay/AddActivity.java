@@ -4,31 +4,24 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
+import android.media.ThumbnailUtils;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.beardedhen.androidbootstrap.BootstrapButton;
-import com.beardedhen.androidbootstrap.BootstrapThumbnail;
 import com.github.siyamed.shapeimageview.RoundedImageView;
-import com.gtx.model.BitmapUtils;
 import com.gtx.model.Constant;
 import com.gtx.model.Entry;
-import com.squareup.timessquare.CalendarPickerView;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 
 
@@ -197,6 +190,11 @@ public class AddActivity extends ActionBarActivity
         }
         else if(requestCode == Constant.RESULT_PIC)
         {
+            if(intent == null)
+            {
+                return;
+            }
+
             Uri image = intent.getData();
 
             if(image == null)
@@ -214,7 +212,8 @@ public class AddActivity extends ActionBarActivity
             cursor.close();
 
             bitmap = picturePath;
-            picselector.setImageBitmap(BitmapUtils.decodeSampledBitmapFromFile(picturePath, picselector.getWidth(), picselector.getHeight()));
+            Bitmap bitmap = BitmapFactory.decodeFile(picturePath);
+            picselector.setImageBitmap(ThumbnailUtils.extractThumbnail(bitmap, picselector.getWidth(), picselector.getHeight()));
         }
     }
 
