@@ -26,6 +26,7 @@ public class DrinkActivity extends ActionBarActivity
     private SwipeLayout swipeLayout;
     private ListView list;
     private BootstrapButton add;
+    private BootstrapButton drinkweb;
 
     private CommonViewAdapter cva;
 
@@ -48,6 +49,18 @@ public class DrinkActivity extends ActionBarActivity
             public void onClick(View v)
             {
                 Intent intent = new Intent(DrinkActivity.this, AddActivity.class);
+                intent.putExtra(Constant.TYPE, Entry.DRINK_TYPE);
+                startActivityForResult(intent, 0);
+            }
+        });
+
+        drinkweb = (BootstrapButton)findViewById(R.id.drink_web);
+        drinkweb.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent intent = new Intent(DrinkActivity.this, ChooseTuan.class);
                 intent.putExtra(Constant.TYPE, Entry.DRINK_TYPE);
                 startActivityForResult(intent, 0);
             }

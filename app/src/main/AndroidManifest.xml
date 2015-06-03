@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          xmlns:tools="http://schemas.android.com/tools"
-          package="com.gtx.eatandplay">
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>
-    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"></uses-permission>
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.gtx.eatandplay" >
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+
     <application
         android:name=".ApplicationEP"
-        tools:replace="android:icon"
         android:allowBackup="true"
         android:icon="@drawable/self_icon"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme"
+        tools:replace="android:icon" >
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
@@ -52,6 +54,14 @@
         <activity
             android:name=".HappyActivity"
             android:label="@string/title_activity_happy" >
+        </activity>
+        <activity
+            android:name=".ChooseTuan"
+            android:label="@string/title_activity_choose_tuan" >
+        </activity>
+        <activity
+            android:name=".PageConten"
+            android:label="@string/title_activity_page_conten" >
         </activity>
     </application>
 

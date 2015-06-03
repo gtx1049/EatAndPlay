@@ -26,6 +26,7 @@ public class PlayActivity extends ActionBarActivity
     private SwipeLayout swipeLayout;
     private ListView list;
     private BootstrapButton add;
+    private BootstrapButton playweb;
 
     private CommonViewAdapter cva;
 
@@ -48,6 +49,18 @@ public class PlayActivity extends ActionBarActivity
             public void onClick(View v)
             {
                 Intent intent = new Intent(PlayActivity.this, AddActivity.class);
+                intent.putExtra(Constant.TYPE, Entry.PLAY_TYPE);
+                startActivityForResult(intent, 0);
+            }
+        });
+
+        playweb = (BootstrapButton)findViewById(R.id.playweb);
+        playweb.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent intent = new Intent(PlayActivity.this, ChooseTuan.class);
                 intent.putExtra(Constant.TYPE, Entry.PLAY_TYPE);
                 startActivityForResult(intent, 0);
             }

@@ -26,6 +26,7 @@ public class HappyActivity extends ActionBarActivity
     private SwipeLayout swipeLayout;
     private ListView list;
     private BootstrapButton add;
+    private BootstrapButton happyweb;
 
     private CommonViewAdapter cva;
 
@@ -48,6 +49,18 @@ public class HappyActivity extends ActionBarActivity
             public void onClick(View v)
             {
                 Intent intent = new Intent(HappyActivity.this, AddActivity.class);
+                intent.putExtra(Constant.TYPE, Entry.HAPPY_TYPE);
+                startActivityForResult(intent, 0);
+            }
+        });
+
+        happyweb = (BootstrapButton)findViewById(R.id.happyweb);
+        happyweb.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent intent = new Intent(HappyActivity.this, ChooseTuan.class);
                 intent.putExtra(Constant.TYPE, Entry.HAPPY_TYPE);
                 startActivityForResult(intent, 0);
             }

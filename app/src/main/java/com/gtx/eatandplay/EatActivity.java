@@ -28,6 +28,7 @@ public class EatActivity extends ActionBarActivity
     private SwipeLayout swipeLayout;
     private ListView list;
     private BootstrapButton add;
+    private BootstrapButton eatweb;
 
     private CommonViewAdapter cva;
 
@@ -50,6 +51,18 @@ public class EatActivity extends ActionBarActivity
             public void onClick(View v)
             {
                 Intent intent = new Intent(EatActivity.this, AddActivity.class);
+                intent.putExtra(Constant.TYPE, Entry.EAT_TYPE);
+                startActivityForResult(intent, 0);
+            }
+        });
+
+        eatweb = (BootstrapButton)findViewById(R.id.eat_web);
+        eatweb.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Intent intent = new Intent(EatActivity.this, ChooseTuan.class);
                 intent.putExtra(Constant.TYPE, Entry.EAT_TYPE);
                 startActivityForResult(intent, 0);
             }

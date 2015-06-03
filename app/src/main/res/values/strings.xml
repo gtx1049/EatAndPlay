@@ -10,4 +10,6 @@
     <string name="title_activity_drink">DrinkActivity</string>
     <string name="title_activity_play">PlayActivity</string>
     <string name="title_activity_happy">HappyActivity</string>
+    <string name="title_activity_choose_tuan">ChooseTuan</string>
+    <string name="title_activity_page_conten">PageConten</string>
 </resources>
