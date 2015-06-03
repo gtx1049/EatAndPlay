@@ -1,10 +1,12 @@
-package com.gtx.model;
+package com.gtx.filter;
 
 import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 
 import com.gtx.crawler.NuoDig;
+import com.gtx.model.BaseFilter;
+import com.gtx.model.Entry;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 

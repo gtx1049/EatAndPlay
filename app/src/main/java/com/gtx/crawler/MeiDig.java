@@ -3,7 +3,7 @@ package com.gtx.crawler;
 import android.content.Context;
 import android.webkit.WebView;
 
-import com.gtx.model.MeiFilter;
+import com.gtx.filter.MeiFilter;
 
 /**
  * Created by Administrator on 2015/5/19.

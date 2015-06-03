@@ -1,4 +1,4 @@
-package com.gtx.model;
+package com.gtx.filter;
 
 import android.content.Context;
 import android.util.Log;
@@ -7,6 +7,8 @@ import android.webkit.CookieSyncManager;
 import android.widget.Toast;
 
 import com.gtx.crawler.DianDig;
+import com.gtx.model.BaseFilter;
+import com.gtx.model.Entry;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.HttpGet;

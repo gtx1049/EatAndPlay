@@ -3,7 +3,8 @@ package com.gtx.crawler;
 import android.content.Context;
 import android.webkit.WebView;
 
-import com.gtx.model.DianFilter;
+import com.gtx.filter.DianFilter;
+
 
 /**
  * Created by Administrator on 2015/5/22.
