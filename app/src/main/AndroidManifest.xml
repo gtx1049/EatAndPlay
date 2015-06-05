@@ -60,7 +60,7 @@
             android:label="@string/title_activity_choose_tuan" >
         </activity>
         <activity
-            android:name=".PageConten"
+            android:name=".PageContent"
             android:label="@string/title_activity_page_conten" >
         </activity>
     </application>
