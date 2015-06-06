@@ -7,11 +7,12 @@
     <WebView
         android:id="@+id/webview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"></WebView>
+        android:layout_height="match_parent"
+        android:layout_below="@+id/get_content"></WebView>
     <Button
         android:id="@+id/get_content"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="POST"/>
+        android:text="点我将本页加入名单"/>
 
 </RelativeLayout>

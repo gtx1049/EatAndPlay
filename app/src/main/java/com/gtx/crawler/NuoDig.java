@@ -2,6 +2,7 @@ package com.gtx.crawler;
 
 import android.content.Context;
 import android.webkit.WebView;
+import android.widget.Button;
 
 import com.gtx.filter.NuoFilter;
 
@@ -12,9 +13,9 @@ public class NuoDig extends BaseDig
 {
     public final static String NOU_URL = "http://m.nuomi.com";
 
-    public NuoDig(WebView wb)
+    public NuoDig(WebView wb,  Button clickme)
     {
-        super(wb);
+        super(wb, clickme);
     }
 
     public void load()

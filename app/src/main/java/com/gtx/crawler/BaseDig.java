@@ -5,8 +5,10 @@ import android.content.Context;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.Button;
 
 import com.gtx.model.BaseFilter;
+import com.gtx.model.Constant;
 
 /**
  * Created by Administrator on 2015/5/19.
@@ -16,10 +18,27 @@ public class BaseDig
     protected WebView wb;
     protected BaseFilter filter;
 
-    public BaseDig(WebView wb)
+    private Button clickme;
+
+    public BaseDig(WebView wb, final Button clickme)
     {
         this.wb = wb;
-        wb.setWebViewClient(new WebViewClient());
+        wb.setWebViewClient(new WebViewClient()
+        {
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url)
+            {
+                if(url.contains(Constant.KEY_WORD))
+                {
+                    clickme.setEnabled(true);
+                }
+
+                WebSettings settings = view.getSettings();
+                settings.setJavaScriptEnabled(true);
+                view.loadUrl(url);
+                return true;
+            }
+        });
     }
 
     public void loadURL(String url)

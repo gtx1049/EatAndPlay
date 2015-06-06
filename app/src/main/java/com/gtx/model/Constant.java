@@ -46,4 +46,11 @@ public class Constant
     public static final String ADD_HINT = "至少填写名字";
 
     public static final int MAX_BOUNDS = 1500;
+
+    public static final String KEY_WORD = "deal";
+
+    public static final String KEY_TUAN = "tuan";
+    public static final int KEY_MEITUAN = 1;
+    public static final int KEY_DAZHONG = 2;
+    public static final int KEY_NUOMI = 3;
 }

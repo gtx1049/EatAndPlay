@@ -16,11 +16,15 @@ public class ChooseTuan extends ActionBarActivity
     private ImageButton ibtndazhong;
     private ImageButton ibtnnuomi;
 
+    private int type;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_tuan);
+
+        type = getIntent().getIntExtra(Constant.TYPE, 0);
 
         ibtnmeituan = (ImageButton)findViewById(R.id.gotomeituan);
         ibtndazhong = (ImageButton)findViewById(R.id.gotodazhong);
@@ -32,7 +36,8 @@ public class ChooseTuan extends ActionBarActivity
             public void onClick(View v)
             {
                 Intent intent = new Intent(ChooseTuan.this, PageContent.class);
-                //intent.putExtra(Constant.TYPE, Entry.DRINK_TYPE);
+                intent.putExtra(Constant.TYPE, type);
+                intent.putExtra(Constant.KEY_TUAN, Constant.KEY_MEITUAN);
                 startActivityForResult(intent, 0);
             }
         });
@@ -43,7 +48,8 @@ public class ChooseTuan extends ActionBarActivity
             public void onClick(View v)
             {
                 Intent intent = new Intent(ChooseTuan.this, PageContent.class);
-                //intent.putExtra(Constant.TYPE, Entry.DRINK_TYPE);
+                intent.putExtra(Constant.TYPE, type);
+                intent.putExtra(Constant.KEY_TUAN, Constant.KEY_DAZHONG);
                 startActivityForResult(intent, 0);
             }
         });
@@ -54,7 +60,8 @@ public class ChooseTuan extends ActionBarActivity
             public void onClick(View v)
             {
                 Intent intent = new Intent(ChooseTuan.this, PageContent.class);
-                //intent.putExtra(Constant.TYPE, Entry.DRINK_TYPE);
+                intent.putExtra(Constant.TYPE, type);
+                intent.putExtra(Constant.KEY_TUAN, Constant.KEY_NUOMI);
                 startActivityForResult(intent, 0);
             }
         });
