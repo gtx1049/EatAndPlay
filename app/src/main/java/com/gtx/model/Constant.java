@@ -53,4 +53,6 @@ public class Constant
     public static final int KEY_MEITUAN = 1;
     public static final int KEY_DAZHONG = 2;
     public static final int KEY_NUOMI = 3;
+
+    public static final String ADD_FROM_WEB = "web";
 }

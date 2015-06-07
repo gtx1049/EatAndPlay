@@ -1,5 +1,10 @@
 package com.gtx.eatandplay;
 
+import android.app.Activity;
+import android.content.Intent;
+import android.graphics.pdf.PdfDocument;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -13,6 +18,7 @@ import com.gtx.crawler.DianDig;
 import com.gtx.crawler.MeiDig;
 import com.gtx.crawler.NuoDig;
 import com.gtx.model.Constant;
+import com.gtx.model.Entry;
 
 
 public class PageContent extends ActionBarActivity
@@ -23,6 +29,9 @@ public class PageContent extends ActionBarActivity
     BaseDig bd;
 
     private int webtype;
+    private int entrytype;
+
+    private Handler handler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -30,28 +39,41 @@ public class PageContent extends ActionBarActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_page_conten);
 
+        handler = new Handler()
+        {
+            @Override
+            public void handleMessage(Message msg)
+            {
+                Entry entry = (Entry)msg.obj;
+
+                Intent intent = new Intent(PageContent.this, AddActivity.class);
+                intent.putExtra(Constant.TYPE, entrytype);
+                intent.putExtra(Entry.KEY_ID, entry);
+                PageContent.this.startActivity(intent);
+            }
+        };
+
         wb = (WebView)findViewById(R.id.webview);
         bt = (Button)findViewById(R.id.get_content);
 
         webtype = getIntent().getIntExtra(Constant.KEY_TUAN, 0);
+        entrytype = getIntent().getIntExtra(Constant.TYPE, 0);
 
         if(webtype == Constant.KEY_MEITUAN)
         {
-            bd = new MeiDig(wb, bt);
+            bd = new MeiDig(wb, bt, handler);
             bd.load();
         }
         else if(webtype == Constant.KEY_NUOMI)
         {
-            bd = new NuoDig(wb, bt);
+            bd = new NuoDig(wb, bt, handler);
             bd.load();
         }
         else if(webtype == Constant.KEY_DAZHONG)
         {
-            bd = new DianDig(wb, bt);
+            bd = new DianDig(wb, bt, handler);
             bd.load();
         }
-
-
 
         bt = (Button)findViewById(R.id.get_content);
 
@@ -60,7 +82,8 @@ public class PageContent extends ActionBarActivity
             @Override
             public void onClick(View v)
             {
-                bd.saveContent(PageContent.this);
+                Entry entry = bd.saveContent(PageContent.this);
+
             }
         });
 

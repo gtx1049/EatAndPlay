@@ -1,6 +1,8 @@
 package com.gtx.filter;
 
 import android.content.Context;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -15,6 +17,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
+import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -26,9 +29,9 @@ public class NuoFilter extends BaseFilter
 
     public static String TAG = "NuoFilter";
 
-    public NuoFilter(Context context)
+    public NuoFilter(Context context, Handler handler)
     {
-        super(context);
+        super(context, handler);
     }
 
     @Override
@@ -43,7 +46,11 @@ public class NuoFilter extends BaseFilter
             {
                 Toast.makeText(context, "Success!", Toast.LENGTH_SHORT);
                 //writeToFile(filename, responseBody);
-                parseForm(new String(responseBody));
+                Entry entry = parseForm(new String(responseBody));
+
+                Message msg = new Message();
+                msg.obj = entry;
+                handler.sendMessage(msg);
             }
 
             @Override
@@ -85,7 +92,8 @@ public class NuoFilter extends BaseFilter
         Log.d(TAG, "Address : " + address);
         Log.d(TAG, "Pic : " + urlpic);
 
-        return null;
+        Entry entry = new Entry(title, address, description, new Date(), new Integer(price));
+        return entry;
     }
 
     private String fetchPic(String detail)

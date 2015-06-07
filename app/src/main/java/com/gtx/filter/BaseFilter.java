@@ -2,6 +2,7 @@ package com.gtx.model;
 
 import android.content.Context;
 import android.os.Environment;
+import android.os.Handler;
 import android.widget.Toast;
 
 import com.loopj.android.http.AsyncHttpClient;
@@ -27,10 +28,12 @@ public class BaseFilter
     private static final int RES_SUC = 200;
 
     protected Context context;
+    protected Handler handler;
 
-    public BaseFilter(Context context)
+    public BaseFilter(Context context, Handler handler)
     {
         this.context = context;
+        this.handler = handler;
     }
 
     public Entry getEntry(String url)

@@ -141,6 +141,25 @@ public class AddActivity extends ActionBarActivity
         pastentry = (Entry)getIntent().getSerializableExtra(Entry.KEY_ID);
         if(pastentry == null)
         {
+            Entry webentry = (Entry)getIntent().getSerializableExtra(Constant.ADD_FROM_WEB);
+
+            if(webentry != null)
+            {
+                DateFormat format = new SimpleDateFormat(Constant.TIME_FORMAT_DIS);
+                nameinput.setText(pastentry.getName());
+                addressinput.setText(pastentry.getAddress());
+                moneyvalue.setText(pastentry.getMoney() + Constant.YUAN);
+                adjustmoney.setProgress(pastentry.getMoney());
+                choosetime.setText(format.format(pastentry.getDate()));
+                strdescription = pastentry.getDescription();
+                //bitmap = pastentry.getBitmap();
+                date = pastentry.getDate();
+                //Bitmap image = BitmapFactory.decodeFile(bitmap);
+                //picselector.setImageBitmap(ThumbnailUtils.extractThumbnail(image, dip2px(Constant.DP_WIDTH_L), dip2px(Constant.DP_HEIGHT_L)));
+                dateflag = true;
+                descriptionflag = true;
+            }
+
             saveentry.setOnClickListener(new View.OnClickListener()
             {
                 @Override

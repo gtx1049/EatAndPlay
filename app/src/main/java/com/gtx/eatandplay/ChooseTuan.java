@@ -38,7 +38,7 @@ public class ChooseTuan extends ActionBarActivity
                 Intent intent = new Intent(ChooseTuan.this, PageContent.class);
                 intent.putExtra(Constant.TYPE, type);
                 intent.putExtra(Constant.KEY_TUAN, Constant.KEY_MEITUAN);
-                startActivityForResult(intent, 0);
+                startActivity(intent);
             }
         });
 
@@ -50,7 +50,7 @@ public class ChooseTuan extends ActionBarActivity
                 Intent intent = new Intent(ChooseTuan.this, PageContent.class);
                 intent.putExtra(Constant.TYPE, type);
                 intent.putExtra(Constant.KEY_TUAN, Constant.KEY_DAZHONG);
-                startActivityForResult(intent, 0);
+                startActivity(intent);
             }
         });
 
@@ -62,7 +62,7 @@ public class ChooseTuan extends ActionBarActivity
                 Intent intent = new Intent(ChooseTuan.this, PageContent.class);
                 intent.putExtra(Constant.TYPE, type);
                 intent.putExtra(Constant.KEY_TUAN, Constant.KEY_NUOMI);
-                startActivityForResult(intent, 0);
+                startActivity(intent);
             }
         });
     }

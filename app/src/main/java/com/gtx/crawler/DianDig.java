@@ -1,10 +1,12 @@
 package com.gtx.crawler;
 
 import android.content.Context;
+import android.os.Handler;
 import android.webkit.WebView;
 import android.widget.Button;
 
 import com.gtx.filter.DianFilter;
+import com.gtx.model.Entry;
 
 
 /**
@@ -14,9 +16,9 @@ public class DianDig extends BaseDig
 {
     public final static String DIAN_URL = "http://m.dianping.com";
 
-    public DianDig(WebView wb, Button clickme)
+    public DianDig(WebView wb, Button clickme, Handler handler)
     {
-        super(wb, clickme);
+        super(wb, clickme, handler);
     }
 
     public void load()
@@ -24,10 +26,10 @@ public class DianDig extends BaseDig
         loadURL(DIAN_URL);
     }
 
-    public void saveContent(Context context)
+    public Entry saveContent(Context context)
     {
         String url = wb.getUrl();
-        filter = new DianFilter(context);
-        filter.getEntry(url);
+        filter = new DianFilter(context, handler);
+        return filter.getEntry(url);
     }
 }
