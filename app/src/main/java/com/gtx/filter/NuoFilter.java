@@ -88,7 +88,7 @@ public class NuoFilter extends BaseFilter
         Log.d(TAG, "Address : " + address);
         Log.d(TAG, "Pic : " + urlpic);
 
-        Entry entry = new Entry(title, address, description, new Date(), new Integer(price));
+        Entry entry = new Entry(title, address, description, new Date(), new Double(price).intValue());
         return entry;
     }
 
