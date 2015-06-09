@@ -1,10 +1,12 @@
-package com.gtx.model;
+package com.gtx.filter;
 
 import android.content.Context;
 import android.os.Environment;
 import android.os.Handler;
+import android.os.Message;
 import android.widget.Toast;
 
+import com.gtx.model.Entry;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 
@@ -30,10 +32,35 @@ public class BaseFilter
     protected Context context;
     protected Handler handler;
 
-    public BaseFilter(Context context, Handler handler)
+    protected Entry entry = null;
+    protected Handler pichandler;
+
+    public BaseFilter(Context context, final Handler handler)
     {
         this.context = context;
         this.handler = handler;
+
+        pichandler = new Handler()
+        {
+            @Override
+            public void handleMessage(Message msg)
+            {
+                while (true)
+                {
+                    if (entry != null)
+                    {
+                        break;
+                    }
+                }
+
+                String path = (String)msg.obj;
+                entry.setBitmap(path);
+
+                Message tomsg = new Message();
+                tomsg.obj = entry;
+                handler.sendMessage(tomsg);
+            }
+        };
     }
 
     public Entry getEntry(String url)
@@ -62,7 +89,7 @@ public class BaseFilter
         }
     }
 
-    protected void writeToFileEx(String filename, byte[] filecontent)
+    protected String writeToFileEx(String filename, byte[] filecontent)
     {
         File sdDir = null;
         boolean sdCardExist = Environment.getExternalStorageState().equals(Environment.MEDIA_MOUNTED);
@@ -88,11 +115,13 @@ public class BaseFilter
             FileOutputStream fos = new FileOutputStream(jpg);
             fos.write(filecontent, 0, filecontent.length);
             fos.close();
+
+            return jpg.getPath();
         } catch (IOException e)
         {
             e.printStackTrace();
         }
-
+        return null;
     }
 
     protected void savePic(String url, final String path)
@@ -104,7 +133,14 @@ public class BaseFilter
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody)
             {
                 Toast.makeText(context, "Success!", Toast.LENGTH_SHORT);
-                writeToFileEx(path, responseBody);
+                String picstring = writeToFileEx(path, responseBody);
+
+                Message msg = new Message();
+                if(picstring != null)
+                {
+                    msg.obj = (String) picstring;
+                }
+                pichandler.sendMessage(msg);
             }
 
             @Override

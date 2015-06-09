@@ -48,7 +48,7 @@ public class PageContent extends ActionBarActivity
 
                 Intent intent = new Intent(PageContent.this, AddActivity.class);
                 intent.putExtra(Constant.TYPE, entrytype);
-                intent.putExtra(Entry.KEY_ID, entry);
+                intent.putExtra(Constant.ADD_FROM_WEB, entry);
                 PageContent.this.startActivity(intent);
             }
         };

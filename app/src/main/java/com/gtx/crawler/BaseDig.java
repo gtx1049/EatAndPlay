@@ -8,7 +8,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
 
-import com.gtx.model.BaseFilter;
+import com.gtx.filter.BaseFilter;
 import com.gtx.model.Constant;
 import com.gtx.model.Entry;
 

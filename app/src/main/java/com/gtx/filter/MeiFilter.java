@@ -6,7 +6,7 @@ import android.os.Message;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.gtx.model.BaseFilter;
+import com.gtx.filter.BaseFilter;
 import com.gtx.model.Entry;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -33,6 +33,8 @@ public class MeiFilter extends BaseFilter
     @Override
     public Entry getEntry(String url)
     {
+        //从这里开始要一直卡住
+
         Toast.makeText(context, url, Toast.LENGTH_SHORT);
         AsyncHttpClient client = new AsyncHttpClient();
         client.get(url, new AsyncHttpResponseHandler()
@@ -43,11 +45,7 @@ public class MeiFilter extends BaseFilter
                 Toast.makeText(context, "Success!", Toast.LENGTH_SHORT);
                 String filename = "Mei.html";
                 //writeToFile(filename, responseBody);
-                Entry entry = parseForm(new String(responseBody));
-
-                Message msg = new Message();
-                msg.obj = entry;
-                handler.sendMessage(msg);
+                entry = parseForm(new String(responseBody));
             }
 
             @Override

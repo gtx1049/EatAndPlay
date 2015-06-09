@@ -146,16 +146,16 @@ public class AddActivity extends ActionBarActivity
             if(webentry != null)
             {
                 DateFormat format = new SimpleDateFormat(Constant.TIME_FORMAT_DIS);
-                nameinput.setText(pastentry.getName());
-                addressinput.setText(pastentry.getAddress());
-                moneyvalue.setText(pastentry.getMoney() + Constant.YUAN);
-                adjustmoney.setProgress(pastentry.getMoney());
-                choosetime.setText(format.format(pastentry.getDate()));
-                strdescription = pastentry.getDescription();
-                //bitmap = pastentry.getBitmap();
-                date = pastentry.getDate();
-                //Bitmap image = BitmapFactory.decodeFile(bitmap);
-                //picselector.setImageBitmap(ThumbnailUtils.extractThumbnail(image, dip2px(Constant.DP_WIDTH_L), dip2px(Constant.DP_HEIGHT_L)));
+                nameinput.setText(webentry.getName());
+                addressinput.setText(webentry.getAddress());
+                moneyvalue.setText(webentry.getMoney() + Constant.YUAN);
+                adjustmoney.setProgress(webentry.getMoney());
+                choosetime.setText(format.format(webentry.getDate()));
+                strdescription = webentry.getDescription();
+                bitmap = webentry.getBitmap();
+                date = webentry.getDate();
+                Bitmap image = BitmapFactory.decodeFile(bitmap);
+                picselector.setImageBitmap(ThumbnailUtils.extractThumbnail(image, dip2px(Constant.DP_WIDTH_L), dip2px(Constant.DP_HEIGHT_L)));
                 dateflag = true;
                 descriptionflag = true;
             }

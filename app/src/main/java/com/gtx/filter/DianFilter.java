@@ -9,7 +9,7 @@ import android.webkit.CookieSyncManager;
 import android.widget.Toast;
 
 import com.gtx.crawler.DianDig;
-import com.gtx.model.BaseFilter;
+import com.gtx.filter.BaseFilter;
 import com.gtx.model.Entry;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -69,11 +69,7 @@ public class DianFilter extends BaseFilter
                 Toast.makeText(context, "Success!", Toast.LENGTH_SHORT);
 
                 //writeToFile(filename, responseBody);
-                Entry entry = parseForm(new String(responseBody));
-
-                Message msg = new Message();
-                msg.obj = entry;
-                handler.sendMessage(msg);
+                entry = parseForm(new String(responseBody));
             }
 
             @Override
