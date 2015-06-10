@@ -49,7 +49,7 @@ public class PageContent extends ActionBarActivity
                 Intent intent = new Intent(PageContent.this, AddActivity.class);
                 intent.putExtra(Constant.TYPE, entrytype);
                 intent.putExtra(Constant.ADD_FROM_WEB, entry);
-                PageContent.this.startActivity(intent);
+                PageContent.this.startActivityForResult(intent, 0);
             }
         };
 
@@ -88,6 +88,20 @@ public class PageContent extends ActionBarActivity
         });
 
         bt.setEnabled(false);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent intent)
+    {
+        if(resultCode == Constant.RESULT_ADD)
+        {
+            Entry entry = (Entry)intent.getSerializableExtra(Constant.ENTRY);
+            Intent backintent = new Intent();
+            backintent.putExtra(Constant.ENTRY, entry);
+            setResult(Constant.RESULT_ADD, backintent);
+
+            finish();
+        }
     }
 
 }
