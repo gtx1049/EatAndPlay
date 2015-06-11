@@ -2,6 +2,7 @@ package com.gtx.eatandplay;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.pdf.PdfDocument;
 import android.os.Handler;
 import android.os.Message;
@@ -20,6 +21,8 @@ import com.gtx.crawler.NuoDig;
 import com.gtx.model.Constant;
 import com.gtx.model.Entry;
 
+import cn.pedant.SweetAlert.SweetAlertDialog;
+
 
 public class PageContent extends ActionBarActivity
 {
@@ -32,6 +35,8 @@ public class PageContent extends ActionBarActivity
     private int entrytype;
 
     private Handler handler;
+
+    private SweetAlertDialog pDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -50,6 +55,7 @@ public class PageContent extends ActionBarActivity
                 intent.putExtra(Constant.TYPE, entrytype);
                 intent.putExtra(Constant.ADD_FROM_WEB, entry);
                 PageContent.this.startActivityForResult(intent, 0);
+                pDialog.dismiss();
             }
         };
 
@@ -82,6 +88,11 @@ public class PageContent extends ActionBarActivity
             @Override
             public void onClick(View v)
             {
+                pDialog = new SweetAlertDialog(PageContent.this, SweetAlertDialog.PROGRESS_TYPE);
+                pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
+                pDialog.setTitleText("Loading");
+                pDialog.setCancelable(false);
+                pDialog.show();
                 Entry entry = bd.saveContent(PageContent.this);
 
             }
