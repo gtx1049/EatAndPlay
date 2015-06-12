@@ -3,6 +3,8 @@ package com.gtx.crawler;
 import android.content.ContentValues;
 import android.content.Context;
 import android.os.Handler;
+import android.view.KeyEvent;
+import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -43,6 +45,23 @@ public class BaseDig
                 settings.setJavaScriptEnabled(true);
                 view.loadUrl(url);
                 return true;
+            }
+        });
+
+        wb.setOnKeyListener(new View.OnKeyListener()
+        {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event)
+            {
+                if(event.getAction() == KeyEvent.ACTION_DOWN)
+                {
+                    if(keyCode == KeyEvent.KEYCODE_BACK && BaseDig.this.wb.canGoBack())
+                    {
+                        BaseDig.this.wb.goBack();
+                        return true;
+                    }
+                }
+                return false;
             }
         });
     }

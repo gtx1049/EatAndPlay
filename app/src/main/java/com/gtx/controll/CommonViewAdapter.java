@@ -238,7 +238,8 @@ public class CommonViewAdapter extends BaseSwipeAdapter
         public void onClick(View v)
         {
             SweetAlertDialog sweetAlertDialog = new SweetAlertDialog(context, SweetAlertDialog.NORMAL_TYPE);
-            sweetAlertDialog.setTitleText(entryList.get(i).getDescription());
+            sweetAlertDialog.setTitleText("~详情~");
+            sweetAlertDialog.setContentText(entryList.get(i).getDescription());
             sweetAlertDialog.setConfirmText("好的！");
             sweetAlertDialog.show();
         }
