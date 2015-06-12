@@ -76,7 +76,7 @@ public class NuoFilter extends BaseFilter
         Element desc = doc.select("div.product-title").first();
         String description = desc.select("p.desc").first().html();
 
-        String address = doc.select("p.shop-address").first().html();
+        String address = getAddress(doc.html());
 
         String urlpic = fetchPic(doc.select("a.detail-product-img").first().html());
 
@@ -90,6 +90,32 @@ public class NuoFilter extends BaseFilter
 
         Entry entry = new Entry(title, address, description, new Date(), new Double(price).intValue());
         return entry;
+    }
+
+    private String getAddress(String html)
+    {
+        Pattern pid = Pattern.compile("dealId: \".*\"");
+        Pattern parea = Pattern.compile("areaDomain: \".*\"");
+        String id = "";
+        String area = "";
+        Matcher m = pid.matcher(html);
+        while (m.find())
+        {
+            id = m.group();
+        }
+        m = parea.matcher(html);
+        while (m.find())
+        {
+            area = m.group();
+        }
+        id = id.substring(id.indexOf("\"") + 1, id.length() - 1);
+        area = area.substring(area.indexOf("\"") + 1, area.length() - 1);
+
+        Log.d(TAG, id);
+        Log.d(TAG, area);
+
+        //doc.select("p.shop-address").first().html();
+        return null;
     }
 
     private String fetchPic(String detail)
