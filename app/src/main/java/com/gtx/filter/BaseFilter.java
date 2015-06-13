@@ -113,6 +113,11 @@ public class BaseFilter
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody)
             {
                 Toast.makeText(context, "Success!", Toast.LENGTH_SHORT);
+
+                if(responseBody.length < 5000)
+                {
+                    Toast.makeText(context, "读取图片失败，可以重试~", Toast.LENGTH_LONG);
+                }
                 String picstring = writeToFileEx(path, responseBody);
 
                 Message msg = new Message();

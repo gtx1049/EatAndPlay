@@ -90,7 +90,7 @@ public class PageContent extends ActionBarActivity
             {
                 pDialog = new SweetAlertDialog(PageContent.this, SweetAlertDialog.PROGRESS_TYPE);
                 pDialog.getProgressHelper().setBarColor(Color.parseColor("#A5DC86"));
-                pDialog.setTitleText("Loading");
+                pDialog.setTitleText("数据读取中...");
                 pDialog.setCancelable(false);
                 pDialog.show();
                 Entry entry = bd.saveContent(PageContent.this);
