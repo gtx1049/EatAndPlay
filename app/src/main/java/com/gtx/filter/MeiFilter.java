@@ -28,6 +28,28 @@ public class MeiFilter extends BaseFilter
     public MeiFilter(Context context, Handler handler)
     {
         super(context, handler);
+
+        pichandler = new Handler()
+        {
+            @Override
+            public void handleMessage(Message msg)
+            {
+                while (true)
+                {
+                    if (entry != null)
+                    {
+                        break;
+                    }
+                }
+
+                String path = (String)msg.obj;
+                entry.setBitmap(path);
+
+                Message tomsg = new Message();
+                tomsg.obj = entry;
+                MeiFilter.this.handler.sendMessage(tomsg);
+            }
+        };
     }
 
     @Override

@@ -40,27 +40,6 @@ public class BaseFilter
         this.context = context;
         this.handler = handler;
 
-        pichandler = new Handler()
-        {
-            @Override
-            public void handleMessage(Message msg)
-            {
-                while (true)
-                {
-                    if (entry != null)
-                    {
-                        break;
-                    }
-                }
-
-                String path = (String)msg.obj;
-                entry.setBitmap(path);
-
-                Message tomsg = new Message();
-                tomsg.obj = entry;
-                handler.sendMessage(tomsg);
-            }
-        };
     }
 
     public Entry getEntry(String url)

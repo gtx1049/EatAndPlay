@@ -13,10 +13,21 @@ import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 
 import org.apache.http.Header;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
+import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -29,9 +40,41 @@ public class NuoFilter extends BaseFilter
 
     public static String TAG = "NuoFilter";
 
+    private String nuoaddress = null;
+
     public NuoFilter(Context context, Handler handler)
     {
         super(context, handler);
+
+        pichandler = new Handler()
+        {
+            @Override
+            public void handleMessage(Message msg)
+            {
+                while (true)
+                {
+                    if (entry != null)
+                    {
+                        break;
+                    }
+                }
+
+                while(true)
+                {
+                    if(nuoaddress != null)
+                    {
+                        break;
+                    }
+                }
+
+                String path = (String)msg.obj;
+                entry.setBitmap(path);
+                entry.setAddress(nuoaddress);
+                Message tomsg = new Message();
+                tomsg.obj = entry;
+                NuoFilter.this.handler.sendMessage(tomsg);
+            }
+        };
     }
 
     @Override
@@ -94,6 +137,8 @@ public class NuoFilter extends BaseFilter
 
     private String getAddress(String html)
     {
+        String retaddress = "";
+
         Pattern pid = Pattern.compile("dealId: \".*\"");
         Pattern parea = Pattern.compile("areaDomain: \".*\"");
         String id = "";
@@ -111,11 +156,39 @@ public class NuoFilter extends BaseFilter
         id = id.substring(id.indexOf("\"") + 1, id.length() - 1);
         area = area.substring(area.indexOf("\"") + 1, area.length() - 1);
 
-        Log.d(TAG, id);
-        Log.d(TAG, area);
+        String url = "http://m.nuomi.com/webapp/tuan/detailAjax?dealId=" + id + "&areaDomain=" + area;
 
-        //doc.select("p.shop-address").first().html();
-        return null;
+        AsyncHttpClient client = new AsyncHttpClient();
+        client.get(url, new AsyncHttpResponseHandler(){
+
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody)
+            {
+                String json = new String(responseBody);
+                JSONObject jo = null;
+                String shopinfo = "";
+                try
+                {
+                    jo = new JSONObject(json);
+                    shopinfo = jo.getJSONObject("data").getString("merchant-info");
+                } catch (JSONException e)
+                {
+                    e.printStackTrace();
+                }
+
+
+                Document doc = Jsoup.parse(shopinfo);
+                NuoFilter.this.nuoaddress = doc.select("p.shop-address").first().html();
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error)
+            {
+                Log.d(TAG, "st " + statusCode + " " + new String(responseBody));
+            }
+        });
+
+        return retaddress;
     }
 
     private String fetchPic(String detail)

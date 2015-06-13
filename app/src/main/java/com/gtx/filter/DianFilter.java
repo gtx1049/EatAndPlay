@@ -45,6 +45,27 @@ public class DianFilter extends BaseFilter
     public DianFilter(Context context, Handler handler)
     {
         super(context, handler);
+        pichandler = new Handler()
+        {
+            @Override
+            public void handleMessage(Message msg)
+            {
+                while (true)
+                {
+                    if (entry != null)
+                    {
+                        break;
+                    }
+                }
+
+                String path = (String)msg.obj;
+                entry.setBitmap(path);
+
+                Message tomsg = new Message();
+                tomsg.obj = entry;
+                DianFilter.this.handler.sendMessage(tomsg);
+            }
+        };
     }
 
     @Override
