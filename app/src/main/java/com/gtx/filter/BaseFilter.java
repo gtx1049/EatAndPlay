@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.widget.Toast;
 
+import com.gtx.model.Constant;
 import com.gtx.model.Entry;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -117,6 +118,7 @@ public class BaseFilter
                 Message msg = new Message();
                 if(picstring != null)
                 {
+                    msg.arg1 = Constant.MESSAGE_PIC;
                     msg.obj = (String) picstring;
                 }
                 pichandler.sendMessage(msg);

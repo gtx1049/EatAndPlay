@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import com.gtx.crawler.NuoDig;
 import com.gtx.filter.BaseFilter;
+import com.gtx.model.Constant;
 import com.gtx.model.Entry;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
@@ -42,6 +43,9 @@ public class NuoFilter extends BaseFilter
 
     private String nuoaddress = null;
 
+    private boolean ispicset = false;
+    private boolean isaddrset = false;
+
     public NuoFilter(Context context, Handler handler)
     {
         super(context, handler);
@@ -59,20 +63,32 @@ public class NuoFilter extends BaseFilter
                     }
                 }
 
-                while(true)
+                if(msg.arg1 == Constant.MESSAGE_PIC)
                 {
-                    if(nuoaddress != null)
+                    String path = (String)msg.obj;
+                    entry.setBitmap(path);
+                    ispicset = true;
+                    if(isaddrset && ispicset)
                     {
-                        break;
+                        Message tomsg = new Message();
+                        tomsg.obj = entry;
+                        NuoFilter.this.handler.sendMessage(tomsg);
                     }
                 }
 
-                String path = (String)msg.obj;
-                entry.setBitmap(path);
-                entry.setAddress(nuoaddress);
-                Message tomsg = new Message();
-                tomsg.obj = entry;
-                NuoFilter.this.handler.sendMessage(tomsg);
+                if(msg.arg1 == Constant.MESSAGE_ADDR)
+                {
+                    entry.setAddress(nuoaddress);
+                    isaddrset = true;
+                    if(isaddrset && ispicset)
+                    {
+                        Message tomsg = new Message();
+                        tomsg.obj = entry;
+                        NuoFilter.this.handler.sendMessage(tomsg);
+                    }
+                }
+
+
             }
         };
     }
@@ -179,6 +195,10 @@ public class NuoFilter extends BaseFilter
 
                 Document doc = Jsoup.parse(shopinfo);
                 NuoFilter.this.nuoaddress = doc.select("p.shop-address").first().html();
+
+                Message msg = new Message();
+                msg.arg1 = Constant.MESSAGE_ADDR;
+                pichandler.sendMessage(msg);
             }
 
             @Override
