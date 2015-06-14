@@ -79,8 +79,12 @@ public class CommonViewAdapter extends BaseSwipeAdapter
 
         TextView addressview = (TextView)view.findViewById(R.id.address_display);
         String straddr = entryList.get(i).getAddress();
-        straddr = straddr.substring(0, 8);
-        straddr += "…";
+        if(straddr.length() > 8)
+        {
+            straddr = straddr.substring(0, 8);
+            straddr += "…";
+        }
+
         addressview.setText(straddr);
         addressview.setOnClickListener(new AddrClickListener(i));
 
