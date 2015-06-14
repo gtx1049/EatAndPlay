@@ -14,6 +14,7 @@ import android.view.View;
 import android.webkit.WebView;
 import android.widget.Button;
 
+import com.beardedhen.androidbootstrap.BootstrapButton;
 import com.gtx.crawler.BaseDig;
 import com.gtx.crawler.DianDig;
 import com.gtx.crawler.MeiDig;
@@ -27,7 +28,8 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 public class PageContent extends ActionBarActivity
 {
     private WebView wb;
-    private Button bt;
+    private BootstrapButton bt;
+    private BootstrapButton back;
 
     BaseDig bd;
 
@@ -60,7 +62,7 @@ public class PageContent extends ActionBarActivity
         };
 
         wb = (WebView)findViewById(R.id.webview);
-        bt = (Button)findViewById(R.id.get_content);
+        bt = (BootstrapButton)findViewById(R.id.get_content);
 
         webtype = getIntent().getIntExtra(Constant.KEY_TUAN, 0);
         entrytype = getIntent().getIntExtra(Constant.TYPE, 0);
@@ -81,7 +83,7 @@ public class PageContent extends ActionBarActivity
             bd.load();
         }
 
-        bt = (Button)findViewById(R.id.get_content);
+        bt = (BootstrapButton)findViewById(R.id.get_content);
 
         bt.setOnClickListener(new View.OnClickListener()
         {
@@ -98,7 +100,18 @@ public class PageContent extends ActionBarActivity
             }
         });
 
-        bt.setEnabled(false);
+        back = (BootstrapButton)findViewById(R.id.content_back);
+        back.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                finish();
+            }
+        });
+
+
+        bt.setBootstrapButtonEnabled(false);
     }
 
     @Override

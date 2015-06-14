@@ -10,6 +10,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
 
+import com.beardedhen.androidbootstrap.BootstrapButton;
 import com.gtx.filter.BaseFilter;
 import com.gtx.model.Constant;
 import com.gtx.model.Entry;
@@ -25,9 +26,9 @@ public class BaseDig
     protected BaseFilter filter;
     protected Handler handler;
 
-    private Button clickme;
+    private BootstrapButton clickme;
 
-    public BaseDig(WebView wb, final Button clickme, Handler handler)
+    public BaseDig(WebView wb, final BootstrapButton clickme, Handler handler)
     {
         this.handler = handler;
         this.wb = wb;
@@ -36,14 +37,14 @@ public class BaseDig
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url)
             {
-                if(url.contains(Constant.KEY_WORD))
-                {
-                    clickme.setEnabled(true);
-                }
 
                 WebSettings settings = view.getSettings();
                 settings.setJavaScriptEnabled(true);
                 view.loadUrl(url);
+                if(url.contains(Constant.KEY_WORD))
+                {
+                    clickme.setBootstrapButtonEnabled(true);
+                }
                 return true;
             }
         });

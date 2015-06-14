@@ -5,6 +5,7 @@ import android.os.Handler;
 import android.webkit.WebView;
 import android.widget.Button;
 
+import com.beardedhen.androidbootstrap.BootstrapButton;
 import com.gtx.filter.MeiFilter;
 import com.gtx.model.Entry;
 
@@ -14,7 +15,7 @@ import com.gtx.model.Entry;
 public class MeiDig extends BaseDig
 {
     public final static String MEI_URL = "http://i.meituan.com";
-    public MeiDig(WebView wb, Button clickme, Handler handler)
+    public MeiDig(WebView wb, BootstrapButton clickme, Handler handler)
     {
         super(wb, clickme, handler);
     }

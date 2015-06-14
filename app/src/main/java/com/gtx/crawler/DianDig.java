@@ -5,6 +5,7 @@ import android.os.Handler;
 import android.webkit.WebView;
 import android.widget.Button;
 
+import com.beardedhen.androidbootstrap.BootstrapButton;
 import com.gtx.filter.DianFilter;
 import com.gtx.model.Entry;
 
@@ -16,7 +17,7 @@ public class DianDig extends BaseDig
 {
     public final static String DIAN_URL = "http://m.dianping.com";
 
-    public DianDig(WebView wb, Button clickme, Handler handler)
+    public DianDig(WebView wb, BootstrapButton clickme, Handler handler)
     {
         super(wb, clickme, handler);
     }

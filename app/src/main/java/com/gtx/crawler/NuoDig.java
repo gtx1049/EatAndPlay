@@ -5,6 +5,7 @@ import android.os.Handler;
 import android.webkit.WebView;
 import android.widget.Button;
 
+import com.beardedhen.androidbootstrap.BootstrapButton;
 import com.gtx.filter.NuoFilter;
 import com.gtx.model.Entry;
 
@@ -15,7 +16,7 @@ public class NuoDig extends BaseDig
 {
     public final static String NOU_URL = "http://m.nuomi.com";
 
-    public NuoDig(WebView wb,  Button clickme, Handler handler)
+    public NuoDig(WebView wb,  BootstrapButton clickme, Handler handler)
     {
         super(wb, clickme, handler);
     }
