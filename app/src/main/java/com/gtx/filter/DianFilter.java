@@ -112,31 +112,38 @@ public class DianFilter extends BaseFilter
 
     public Entry parseForm(String form)
     {
-        Document doc = Jsoup.parse(form);
+        try
+        {
+            Document doc = Jsoup.parse(form);
 
-        Element priceElement = doc.select("div.price").first();
-        String price = priceElement.nextElementSibling().html();
+            Element priceElement = doc.select("div.price").first();
+            String price = priceElement.nextElementSibling().html();
 
-        Element titleElement = doc.select("div.intro").first();
-        String title = titleElement.select("h3").first().html();
+            Element titleElement = doc.select("div.intro").first();
+            String title = titleElement.select("h3").first().html();
 
-        String description = titleElement.select("p").first().html();
+            String description = titleElement.select("p").first().html();
 
-        String address = doc.select("div.address").first().html();
+            String address = doc.select("div.address").first().html();
 
-        Element content = doc.select("div.content").first();
-        String urlpic = content.select("div.info").first().select("img").attr("src");
+            Element content = doc.select("div.content").first();
+            String urlpic = content.select("div.info").first().select("img").attr("src");
 
-        this.savePic(urlpic, urlpic.substring(urlpic.length() - 15, urlpic.length()).replaceAll("/", "&"));
+            this.savePic(urlpic, urlpic.substring(urlpic.length() - 15, urlpic.length()).replaceAll("/", "&"));
 
-        Log.d(TAG, "Price : " + price);
-        Log.d(TAG, "Title : " + title);
-        Log.d(TAG, "Description : " + description);
-        Log.d(TAG, "Address : " + address);
-        Log.d(TAG, "Pic : " + urlpic);
+            //Log.d(TAG, "Price : " + price);
+            //Log.d(TAG, "Title : " + title);
+            //Log.d(TAG, "Description : " + description);
+            //Log.d(TAG, "Address : " + address);
+            //Log.d(TAG, "Pic : " + urlpic);
 
-        Entry entry = new Entry(title, address, description, new Date(), new Double(price).intValue());
+            Entry entry = new Entry(title, address, description, new Date(), new Double(price).intValue());
 
-        return entry;
+            return entry;
+        }catch (Exception e)
+        {
+            Toast.makeText(context, "读取失败", Toast.LENGTH_LONG);
+        }
+        return new Entry("", "", "", new Date(), 0);
     }
 }

@@ -88,32 +88,39 @@ public class MeiFilter extends BaseFilter
 
     public Entry parseForm(String form)
     {
-        Document doc = Jsoup.parse(form);
+        try
+        {
+            Document doc = Jsoup.parse(form);
 
-        Element dl = doc.select("dl").first();
+            Element dl = doc.select("dl").first();
 
-        Element priceElement = dl.select("dd").first();
-        String price = priceElement.select("strong").first().html();
+            Element priceElement = dl.select("dd").first();
+            String price = priceElement.select("strong").first().html();
 
-        Element titleElement = priceElement.nextElementSibling();
-        String title = titleElement.select("h1").first().html();
+            Element titleElement = priceElement.nextElementSibling();
+            String title = titleElement.select("h1").first().html();
 
-        String description = titleElement.select("p").first().html();
+            String description = titleElement.select("p").first().html();
 
-        String address = doc.select("div.address").first().html();
+            String address = doc.select("div.address").first().html();
 
-        String urlpic = doc.select("div.album").first().select("img").first().attr("src");
+            String urlpic = doc.select("div.album").first().select("img").first().attr("src");
 
-        this.savePic(urlpic, urlpic.substring(urlpic.length() - 15, urlpic.length()));
+            this.savePic(urlpic, urlpic.substring(urlpic.length() - 15, urlpic.length()));
 
-        Log.d(TAG, "Price : " + price);
-        Log.d(TAG, "Title : " + title);
-        Log.d(TAG, "Description : " + description);
-        Log.d(TAG, "Address : " + address);
-        Log.d(TAG, "Pic : " + urlpic);
+            //Log.d(TAG, "Price : " + price);
+            //Log.d(TAG, "Title : " + title);
+            //Log.d(TAG, "Description : " + description);
+            //Log.d(TAG, "Address : " + address);
+            //Log.d(TAG, "Pic : " + urlpic);
 
-        Entry entry = new Entry(title, address, description, new Date(), new Double(price).intValue());
-        return entry;
+            Entry entry = new Entry(title, address, description, new Date(), new Double(price).intValue());
+            return entry;
+        }catch (Exception e)
+        {
+            Toast.makeText(context, "读取失败", Toast.LENGTH_LONG);
+        }
+        return new Entry("", "", "", new Date(), 0);
     }
 
 }

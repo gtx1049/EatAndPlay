@@ -41,27 +41,33 @@
         </activity>
         <activity
             android:name=".DescriptionActivity"
-            android:label="@string/title_activity_description" >
+            android:label="@string/title_activity_description"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".DrinkActivity"
-            android:label="@string/title_activity_drink" >
+            android:label="@string/title_activity_drink"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".PlayActivity"
-            android:label="@string/title_activity_play" >
+            android:label="@string/title_activity_play"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".HappyActivity"
-            android:label="@string/title_activity_happy" >
+            android:label="@string/title_activity_happy"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".ChooseTuan"
-            android:label="@string/title_activity_choose_tuan" >
+            android:label="@string/title_activity_choose_tuan"
+            android:screenOrientation="portrait">
         </activity>
         <activity
             android:name=".PageContent"
-            android:label="@string/title_activity_page_conten" >
+            android:label="@string/title_activity_page_conten"
+            android:screenOrientation="portrait">
         </activity>
     </application>
 

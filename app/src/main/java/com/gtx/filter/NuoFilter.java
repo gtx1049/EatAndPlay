@@ -126,29 +126,38 @@ public class NuoFilter extends BaseFilter
 
     public Entry parseForm(String form)
     {
-        Document doc = Jsoup.parse(form);
+        try
+        {
+            Document doc = Jsoup.parse(form);
 
-        String price = doc.select("em.price-value").first().html();
+            String price = doc.select("em.price-value").first().html();
 
-        String title = doc.select("h3.title").first().html();
+            String title = doc.select("h3.title").first().html();
 
-        Element desc = doc.select("div.product-title").first();
-        String description = desc.select("p.desc").first().html();
+            Element desc = doc.select("div.product-title").first();
+            String description = desc.select("p.desc").first().html();
 
-        String address = getAddress(doc.html());
+            String address = getAddress(doc.html());
 
-        String urlpic = fetchPic(doc.select("a.detail-product-img").first().html());
+            String urlpic = fetchPic(doc.select("a.detail-product-img").first().html());
+            this.savePic(urlpic, urlpic.substring(urlpic.length() - 15, urlpic.length()));
 
-        this.savePic(urlpic, urlpic.substring(urlpic.length() - 15, urlpic.length()));
+            Entry entry = new Entry(title, address, description, new Date(), new Double(price).intValue());
+            return entry;
+        }
+        catch (Exception e)
+        {
+            Toast.makeText(context, "读取失败", Toast.LENGTH_LONG);
+        }
 
-        Log.d(TAG, "Price : " + price);
-        Log.d(TAG, "Title : " + title);
-        Log.d(TAG, "Description : " + description);
-        Log.d(TAG, "Address : " + address);
-        Log.d(TAG, "Pic : " + urlpic);
 
-        Entry entry = new Entry(title, address, description, new Date(), new Double(price).intValue());
-        return entry;
+        //Log.d(TAG, "Price : " + price);
+        //Log.d(TAG, "Title : " + title);
+        //Log.d(TAG, "Description : " + description);
+        //Log.d(TAG, "Address : " + address);
+        //Log.d(TAG, "Pic : " + urlpic);
+        return new Entry("", "", "", new Date(), 0);
+
     }
 
     private String getAddress(String html)

@@ -78,7 +78,11 @@ public class CommonViewAdapter extends BaseSwipeAdapter
         nameview.setText(entryList.get(i).getName());
 
         TextView addressview = (TextView)view.findViewById(R.id.address_display);
-        addressview.setText(entryList.get(i).getAddress());
+        String straddr = entryList.get(i).getAddress();
+        straddr = straddr.substring(0, 8);
+        straddr += "…";
+        addressview.setText(straddr);
+        addressview.setOnClickListener(new AddrClickListener(i));
 
         TextView timeview = (TextView)view.findViewById(R.id.time_display);
         DateFormat format = new SimpleDateFormat(Constant.TIME_FORMAT);
@@ -240,6 +244,26 @@ public class CommonViewAdapter extends BaseSwipeAdapter
             SweetAlertDialog sweetAlertDialog = new SweetAlertDialog(context, SweetAlertDialog.NORMAL_TYPE);
             sweetAlertDialog.setTitleText("~详情~");
             sweetAlertDialog.setContentText(entryList.get(i).getDescription());
+            sweetAlertDialog.setConfirmText("好的！");
+            sweetAlertDialog.show();
+        }
+    }
+
+    public class AddrClickListener implements View.OnClickListener
+    {
+        private int i;
+
+        public AddrClickListener(int i)
+        {
+            this.i = i;
+        }
+
+        @Override
+        public void onClick(View v)
+        {
+            SweetAlertDialog sweetAlertDialog = new SweetAlertDialog(context, SweetAlertDialog.NORMAL_TYPE);
+            sweetAlertDialog.setTitleText("~详细地址~");
+            sweetAlertDialog.setContentText(entryList.get(i).getAddress());
             sweetAlertDialog.setConfirmText("好的！");
             sweetAlertDialog.show();
         }
